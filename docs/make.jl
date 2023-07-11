@@ -12,3 +12,7 @@ makedocs(
         ]
     ]
 )
+
+deploydocs(
+    repo = "github.com/CourtA96/ADM1jl.git",
+)

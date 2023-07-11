@@ -6,20 +6,21 @@ CurrentModule = ADM1code
 ## Functions
 
 ```@docs
+ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Float64};alg = Rodas4P(), tols=1e-4,tMax = 300.0)
+```
+
+```@docs
+RHSfun(du,u,p,t)
+```
+
+```@docs
+reactionrates(bp,rp,php,pressures,sx,NREAC::Int)
+```
+
+```@docs
 pressureOfGasses(sx,php,rp)
 ```
 
 ```@docs
 monod(u, k)
-```
-
-!!! tip "An optional title"
-    Here is something you should pay attention to.
-
-```@docs
-inflowvector_definition()
-```
-
-```@docs
-reactionrates(bp,rp,php,pressures,sx,NREAC::Int)
 ```
