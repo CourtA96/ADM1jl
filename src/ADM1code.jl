@@ -33,6 +33,7 @@ include("multichamber.jl")
 #####################################################
 # Functions:
 
+export pressureOfGasses
 """
     pressureOfGasses(sx,php,rp)
 
@@ -85,6 +86,7 @@ function pressureOfGasses(sx,php,rp)
    return pressures
 end
 
+export monod
 """
     monod(u, k)
 
@@ -112,6 +114,7 @@ function monod(u,k)
    end
 end
 
+export reactionrates
 """
     reactionrates(bp,rp,php,pressures,sx,NREAC::Int)
 
@@ -333,6 +336,7 @@ end
 #function RHSfun(u::Vector{Float64},p::Array{AbstractArray,1},t::Float64)
 #function RHSfun(u::Vector{Float64},p::Array{AbstractArray{Float64,N} where N,1},t::Float64)
 
+export RHSfun
 """
     RHSfun(du,u,p,t)
 
@@ -389,6 +393,7 @@ end
 ##########################################################
 """
 
+export ExampleSol
 """
     function ExampleSol(tspan::Tuple,u0::Vector,IV::Vector; <keyword arguments>)
 
@@ -466,6 +471,7 @@ function ExampleSol(tspan::Tuple,u0::Vector,IV::Vector;alg = Rodas4P(), tols=1e-
 
 end
 
+export ADM1sol
 """
     function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector; <keyword arguments>)
 

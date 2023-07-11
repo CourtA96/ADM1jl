@@ -11,6 +11,26 @@ The functions that define the model parameters:
    - initial conditions
 """
 
+"""
+      inflowvector_definition()
+
+Returns the inflow vector.
+
+# Examples
+```jldoctest
+julia> ADM1code.inflowvector_definition()
+35-element Vector{Float64}:
+ 0.01
+ 0.001
+ 0.001
+ 0.001
+ ⋮
+ 0.02
+ 0.0
+ 0.0
+ 0.0
+```
+"""
 @memoize function inflowvector_definition()
    """
    #####################################################
