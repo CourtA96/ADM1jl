@@ -11,7 +11,7 @@ jobs:
   build:
     permissions:
       contents: write
-    runs-on: windows-11
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
       - uses: julia-actions/setup-julia@v1
