@@ -9,15 +9,15 @@ Before beginning, make sure that the file `model_parameters.csv` is saved in you
 `ADM1sol` takes the timespan, initial conditions, and inflow vector as inputs. The timespan is length 2 and type `Tuple{Float64}`. It specifies how the initial and final times of the simulation. The initial conditions and inflow vector both have type `Vector{Float64}` and length 35.  To test this out, run the following code:
 
 ```@repl
-using ADM1
+using ADM1jl
 
-u0 = ADM1.InitialConditions(); # assigns the default initial conditions to u0
+u0 = ADM1jl.InitialConditions(); # assigns the default initial conditions to u0
 
-IV = ADM1.inflowvector_definition(); # assigns the default inflow vector to IV
+IV = ADM1jl.inflowvector_definition(); # assigns the default inflow vector to IV
 
 tspan = (0.0,200.0); # the solution will be computed from t=0.0 to t=200.0
 
-sol, tSol = ADM1.ADM1sol(tspan,u0,IV); # computes the solution  and saves it to sol, the time to solve is saved to tSol
+sol, tSol = ADM1jl.ADM1sol(tspan,u0,IV); # computes the solution  and saves it to sol, the time to solve is saved to tSol
 
 sol # the solution has two fields: t contains the timesteps and u contains the solution at each timestep
 

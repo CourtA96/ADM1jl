@@ -1,6 +1,6 @@
-using ADM1
+using ADM1jl
 using Test
 
-@testset "ADM1.jl" begin
+@testset "ADM1jl.jl" begin
     # Write your tests here.
 end

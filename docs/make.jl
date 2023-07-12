@@ -2,10 +2,10 @@
 #test
 
 
-using Documenter, ADM1
+using Documenter, ADM1jl
 
 makedocs(
-    sitename="ADM1.jl",
+    sitename="ADM1jl",
     pages = [
         "Home" => "index.md",
         "Manual" => [
