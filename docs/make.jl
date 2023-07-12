@@ -1,10 +1,10 @@
 # push!(LOAD_PATH,"C:\\Users\\court\\OneDrive - University of Guelph\\PhD\\Research\\Code\\ADM1jl\\ADM1jl\\src")
 
 
-using Documenter, ADM1code
+using Documenter, ADM1jl
 
 makedocs(
-    sitename="ADM1code.jl",
+    sitename="ADM1jl",
     pages = [
         "Home" => "index.md",
         "Manual" => [

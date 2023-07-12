@@ -1,4 +1,4 @@
-module ADM1code
+module ADM1jl
 
 #####################################################
 # A Julia code to solve the Anaerobic Digestion Model No. 1
@@ -46,13 +46,13 @@ Compute the pressures of the gasses.
 
 # Examples
 ```jldoctest
-julia> u0 = ADM1code.InitialConditions();
+julia> u0 = ADM1jl.InitialConditions();
 
-julia> rp = ADM1code.reactorParameterDefinition();
+julia> rp = ADM1jl.reactorParameterDefinition();
 
-julia> php = ADM1code.physiochemicalParameterDefinition(rp);
+julia> php = ADM1jl.physiochemicalParameterDefinition(rp);
 
-julia> ADM1code.pressureOfGasses(u0,php,rp)
+julia> ADM1jl.pressureOfGasses(u0,php,rp)
 5-element Vector{Float64}:
     1.6333471490625e-5
     0.6525381992578124
@@ -96,11 +96,11 @@ If `u <= 0` return `0`.
 
 # Examples
 ```jldoctest
-julia> ADM1code.monod(3.0,2.0) # when u is non-zero positive
+julia> ADM1jl.monod(3.0,2.0) # when u is non-zero positive
 0.6
 ```
 ```jldoctest
-julia> ADM1code.monod(-3.0,2.0) # when u is negative
+julia> ADM1jl.monod(-3.0,2.0) # when u is negative
 0
 ```
 
@@ -130,19 +130,19 @@ Compute and return the vector of reaction rates.
 
 # Examples
 ```jldoctest
-julia> u0 = ADM1code.InitialConditions();
+julia> u0 = ADM1jl.InitialConditions();
 
-julia> bp = ADM1code.biochemicalparameter_definition();
+julia> bp = ADM1jl.biochemicalparameter_definition();
 
-julia> rp = ADM1code.reactorParameterDefinition();
+julia> rp = ADM1jl.reactorParameterDefinition();
 
-julia> php = ADM1code.physiochemicalParameterDefinition(rp);
+julia> php = ADM1jl.physiochemicalParameterDefinition(rp);
 
-julia> pressures = ADM1code.pressureOfGasses(u0,php,rp);
+julia> pressures = ADM1jl.pressureOfGasses(u0,php,rp);
 
 julia> NREAC = 29;
 
-julia> ADM1code.reactionrates(bp,rp,php,pressures,u0,NREAC)
+julia> ADM1jl.reactionrates(bp,rp,php,pressures,u0,NREAC)
 29-element Vector{Real}:
  0.155
  0.28
@@ -408,11 +408,11 @@ Also return the time (in seconds) the solution took to compute.
 
 # Examples
 ```julia-repl
-julia> u0 = ADM1code.InitialConditions();
+julia> u0 = ADM1jl.InitialConditions();
 
-julia> IV = ADM1code.inflowvector_definition();
+julia> IV = ADM1jl.inflowvector_definition();
 
-julia> sol, tSol = ADM1code.ExampleSol((0.0,200.0),u0,IV);
+julia> sol, tSol = ADM1jl.ExampleSol((0.0,200.0),u0,IV);
 
 julia> sol
 retcode: Success
@@ -486,11 +486,11 @@ Also return the time (in seconds) the solution took to compute. The difference b
 
 # Examples
 ```julia-repl
-julia> u0 = ADM1code.InitialConditions();
+julia> u0 = ADM1jl.InitialConditions();
 
-julia> IV = ADM1code.inflowvector_definition();
+julia> IV = ADM1jl.inflowvector_definition();
 
-julia> sol, tSol = ADM1code.ADM1sol((0.0,200.0),u0,IV);
+julia> sol, tSol = ADM1jl.ADM1sol((0.0,200.0),u0,IV);
 
 julia> sol
 retcode: Success
@@ -610,15 +610,15 @@ Also return the time (in seconds) the solution took to compute.
 
 # Examples
 ```julia-repl
-julia> u0 = ADM1code.InitialConditions();
+julia> u0 = ADM1jl.InitialConditions();
 
 julia> t = [i for i in 0.0:0.1:50.0]
 
-julia> IV_temp = ADM1code.inflowvector_definition();
+julia> IV_temp = ADM1jl.inflowvector_definition();
 
 julia> IV = [IV_temp*(0.5*rand()+1.0) for i in 1:length(t)]
 
-julia> sol,tSol = ADM1code.ADM1sol((0.0,50.0),u0,IV,t);
+julia> sol,tSol = ADM1jl.ADM1sol((0.0,50.0),u0,IV,t);
 
 julia> sol
 retcode: Success
