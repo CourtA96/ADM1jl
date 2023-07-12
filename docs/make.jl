@@ -4,10 +4,10 @@ using Pkg
 
 Pkg.add("Documenter")
 
-using Documenter, ADM1code
+using Documenter, ADM1jl
 
 makedocs(
-    sitename="ADM1code.jl",
+    sitename="ADM1jl",
     pages = [
         "Home" => "index.md",
         "Manual" => [

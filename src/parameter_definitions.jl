@@ -18,7 +18,7 @@ Returns the inflow vector.
 
 # Examples
 ```jldoctest
-julia> ADM1code.inflowvector_definition()
+julia> ADM1jl.inflowvector_definition()
 35-element Vector{Float64}:
  0.01
  0.001
