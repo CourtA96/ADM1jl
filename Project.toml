@@ -1,7 +1,16 @@
-name = "ADM1code"
-uuid = "3db389fc-475a-46e2-92d5-a8c8bf31df22"
+name = "ADM1"
+uuid = "fcba7d9c-eb10-42d4-b263-36979bb5b0d2"
 authors = ["Courtney Allen <callen15@uoguelph.ca>", "Alexandra Mazanko <amazanko@uoguelph.ca>"]
-version = "0.1.0"
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
