@@ -1,6 +1,6 @@
 # List of Functions
 ```@meta
-CurrentModule = ADM1code
+CurrentModule = ADM1
 ```
 
 ## Functions
