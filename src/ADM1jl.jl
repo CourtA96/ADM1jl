@@ -12,9 +12,8 @@ module ADM1jl
 using LinearAlgebra
 using DifferentialEquations
 using Plots
-#pyplot()
+default(fontfamily="Helvetica")
 using SparseArrays
-#using DiffEqSensitivity
 using Memoize
 using CSV
 using DataFrames
