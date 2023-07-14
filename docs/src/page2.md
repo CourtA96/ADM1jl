@@ -2,6 +2,7 @@
 
 To solve ADM1 for a single tank reactor, just run `ADM1sol`. For multiple tanks running in parallel, use `multichamberSolution`
 
+
 ## Installation
 
 To install `ADM1jl` open the Julia REPL and run the following:
@@ -12,6 +13,7 @@ julia> Pkg.add("https://github.com/CourtA96/ADM1jl")
 ```
 
 OR enter the Pkg REPL by pressing ] and running:
+
 
 ```
 add https://github.com/CourtA96/ADM1jl
