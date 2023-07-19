@@ -1,13 +1,4 @@
-function plotSols(sol)
-   figure = plot(sol, vars=(0,1),reuse = false)
-   for i = 2:size(sol)[1]
-      plot!(sol,vars=(0,i))
-   end
-   display(figure)
-end
-
-
-function plotSols2(sol;titleText::String="Plots of Solutions")
+function plotSols(sol;titleText::String="Plots of Solutions")
    # I got the code to create the title from https://stackoverflow.com/questions/43066957/adding-global-title-to-plots-jl-subplots
    y = (ones(3))
    title1 = scatter(y, marker=0,markeralpha=0, annotations=(2, y[2], text(string(titleText, " (1 of 2)"),20,"Helvetica")),axis=false, grid=false, leg=false,size=(200,100), labels=:none,reuse=false)
