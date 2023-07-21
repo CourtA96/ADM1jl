@@ -26,7 +26,7 @@ julia> using ADM1jl
 ```
 
 
-## Getting Started
+## Basic Usage
 
 Before beginning, make sure that the file `model_parameters.csv` is saved in your working directory. `model_parameters.csv` can be found on the github [here](https://github.com/CourtA96/ADM1jl/blob/main/model_parameters.csv). 
 
