@@ -53,7 +53,7 @@ The initial conditions and inflow vector can be changed to any `Vector{Float64}`
 
 ## Modifying Parameters
 
-To change the system parameters, such as `T_base` or `P_atm`, just open the file `model_parameters.csv` in the `src` directory. Edit whichever entries are necessary, save, and exit. Running `ADM1sol` again will solve the system with the updated parameters.
+To change the system parameters, such as `T_base` or `P_atm`, just open the file `model_parameters.csv` in your working directory (`model_parameters.csv` can be found [here](https://github.com/CourtA96/ADM1jl/blob/main/model_parameters.csv)). Edit whichever entries are necessary, save, and exit. Running `ADM1sol` again will solve the system with the updated parameters.
 
 ## State Variables and their Indices
 
