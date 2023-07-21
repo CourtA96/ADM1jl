@@ -17,5 +17,5 @@ makedocs(
 
 deploydocs(
     repo = "github.com/CourtA96/ADM1jl.git",
-    push_preview = true,
+    push_preview = false,
 )
