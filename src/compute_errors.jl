@@ -1,36 +1,48 @@
 #compute_errors.jl
+"""
+The Functions that 
+   - define the true solution at 200 days 
+   - compute the difference between two input solutions
+"""
 
-function PyADM1results()
-   """
-   Function that returns a vector containing the solutions given by PyADM1.py at time t=200.0
-   """
-   results = [
-   0.01199361878146199, 0.005200381337872014, 0.09898093692189579, 0.011868933687433882, 0.013074922196440932, 0.01597024556830165, 0.199862345903217, 2.3399607909219572e-07, 0.05530940017982466, 0.15001903585035922, 0.12999908025333287, 0.32999999810480457, #substrates
-   0.3099927282048765, 0.027996040159098214, 0.10025714796109751, 0.02904994126445399, 0.4200010468463959, 1.179987011031539, 0.24000062802816663, 0.43000064239933733, 0.14000101865957973, 0.7600029896614757, 0.3199983928491184, 25.600010410706354, # biomass
-   0.011839659664365938, 0.013045392220216352, 0.015928914690047917, 0.1994695337234892, 0.14029205509292164, 0.004084592387200918, 0.04, 0.02, # ions
-   1.022845431128427e-05, 1.6352974486422807, 0.013906264769753896 # gas
-   ]
+export computeDifference
+"""
+    computeDifference(sol, trueSol)
 
-   return results
+Compute the percent difference between each element in two vector of type `Vector{Float64}`.
 
-end
+# Arguments
+- `sol::Vector`: the solution given at a time.
+- `trueSol::Vector`: the true solution at that time.
 
-function computeError(sol)
-   """
-   Function that returns a vector containing the relative difference between the input sol and the result of PyADM1.py.
+# Examples
+```jldoctest
+julia> u0 = initialConditions();
 
-   Note:
-   The PyADM1.py solution is at the time t=200.0
-   """
-   trueSol = PyADM1results()
-   error = abs.((sol[end]-trueSol)./trueSol)*100
-   return error
-end
+julia> IV = inflowvector_definition();
 
-function computeError2(sol,trueSol)
+julia> sol, tSol = ADM1sol((0.0,200.0),u0,IV); # compute the solution
+
+julia> trueSol = trueSolutionADM1_200days; # the true solution at 200 days
+
+julia> d = computeDifference(sol[end],trueSol); # compute the difference
+```
+"""
+function computeDifference(sol,trueSol)
    """
    Function that returns a vector containing the relative difference between the inputs sol and trueSol
    """
-   error = abs.((sol[end]-trueSol)./trueSol)*100
+   error = abs.((sol-trueSol)./trueSol)*100
    return error
+end
+
+export trueSolutionADM1_200days
+"""
+    trueSolutionADM1_200days()
+
+Return the solution (`Vector{Float64}`) for the default parameters at 200 days.
+```
+"""
+function trueSolutionADM1_200days()
+   return [0.011954829810563401, 0.0053147401832121036, 0.09862141249882697, 0.011625006887037806, 0.013250730223207484, 0.015783663823179507, 0.19738633671962316, 2.3594504387169125e-7, 0.05508920869990237, 0.15268433594303998, 0.1302294760799933, 0.3286981032420448, 0.30869798826346184, 0.027947243664334303, 0.10257410933597609, 0.029483054551227825, 0.420166031332133, 1.1791718405506475, 0.24303536337252007, 0.431921107655618, 0.13730593572985716, 0.7605713976442028, 0.3170229998944603, 25.61739467100561, 0.011596224203413465, 0.013220740490142689, 0.015742812872396397, 0.1969985369743189, 0.1427840760901829, 0.004087783314163287, 0.04, 0.02, 1.0241037663368444e-5, 1.6256194037384155, 0.014150346745679485]
 end

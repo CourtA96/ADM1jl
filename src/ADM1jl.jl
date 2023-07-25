@@ -19,6 +19,32 @@ using CSV
 using DataFrames
 using Interpolations
 #####################################################
+# Functions to export from other files
+
+export computeDifference
+export trueSolutionADM1_200days
+
+export transportmatrix_definition
+export petersenmatrixtranspose_definition
+
+export RHSfunInflowVaried
+export MultiChamberSolutionExample
+export MultiChamberSolution
+import ExampleMultiChamberSol
+export ADM1MultiChamberSol
+
+export inflowvector_definition
+export stoichiometricparameter_definition
+export carbonContent_definition
+export biochemicalparameter_definition
+export reactorParameterDefinition
+export physiochemicalParameterDefinition
+export computePhysiochemicalParameterDefinition
+export initialConditions
+
+export plotSols
+export individualSolutions
+
 # dependent files:
 
 include("matrix_definitions.jl")
@@ -45,7 +71,7 @@ Compute the pressures of the gasses.
 
 # Examples
 ```jldoctest
-julia> u0 = ADM1jl.InitialConditions();
+julia> u0 = ADM1jl.initialConditions();
 
 julia> rp = ADM1jl.reactorParameterDefinition();
 
@@ -57,7 +83,7 @@ julia> ADM1jl.pressureOfGasses(u0,php,rp)
     0.6525381992578124
     0.35869584449999997
     1.0669181223042932
- 2695.9061152146637
+    2695.9061152146637
 ```
 """
 function pressureOfGasses(sx,php,rp)
@@ -129,7 +155,7 @@ Compute and return the vector of reaction rates.
 
 # Examples
 ```jldoctest
-julia> u0 = ADM1jl.InitialConditions();
+julia> u0 = ADM1jl.initialConditions();
 
 julia> bp = ADM1jl.biochemicalparameter_definition();
 
@@ -407,7 +433,7 @@ Also return the time (in seconds) the solution took to compute.
 
 # Examples
 ```julia-repl
-julia> u0 = ADM1jl.InitialConditions();
+julia> u0 = ADM1jl.initialConditions();
 
 julia> IV = ADM1jl.inflowvector_definition();
 
@@ -485,11 +511,11 @@ Also return the time (in seconds) the solution took to compute. The difference b
 
 # Examples
 ```julia-repl
-julia> u0 = ADM1jl.InitialConditions();
+julia> u0 = initialConditions();
 
-julia> IV = ADM1jl.inflowvector_definition();
+julia> IV = inflowvector_definition();
 
-julia> sol, tSol = ADM1jl.ADM1sol((0.0,200.0),u0,IV);
+julia> sol, tSol = ADM1sol((0.0,200.0),u0,IV);
 
 julia> sol
 retcode: Success
@@ -597,7 +623,7 @@ end
 """
     function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Vector{Float64}},IVtimes::Vector{Float64}; <keyword arguments>)
 
-Compute the solution for the given timespan, `tspan`; initial condition, `u0`; and variable inflow vector 
+Compute the solution with variable inflow for the given timespan, `tspan`; initial condition, `u0`; and variable inflow vector 
 `IV` where each entry in IV corresponds to the inflow vector at the corresponding entry in `IVtimes`
 
 Also return the time (in seconds) the solution took to compute.
@@ -609,7 +635,7 @@ Also return the time (in seconds) the solution took to compute.
 
 # Examples
 ```julia-repl
-julia> u0 = ADM1jl.InitialConditions();
+julia> u0 = ADM1jl.initialConditions();
 
 julia> t = [i for i in 0.0:0.1:50.0]
 

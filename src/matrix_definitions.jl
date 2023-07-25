@@ -6,7 +6,7 @@ The functions that build the:
    - petersen matrix
    - inflow vector
 """
-
+export transportmatrix_definition
 @memoize function transportmatrix_definition(rp,pressures)
    """
    #####################################################
@@ -63,6 +63,7 @@ The functions that build the:
    return TM
 end
 
+export petersenmatrixtranspose_definition
 @memoize function petersenmatrixtranspose_definition(rp,bp,sp,cc)
    """
    #####################################################
