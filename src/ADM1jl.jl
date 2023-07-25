@@ -624,7 +624,7 @@ end
     function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Vector{Float64}},IVtimes::Vector{Float64}; <keyword arguments>)
 
 Compute the solution with variable inflow for the given timespan, `tspan`; initial condition, `u0`; and variable inflow vector 
-`IV` where each entry in IV corresponds to the inflow vector at the corresponding entry in `IVtimes`
+`IV` where each entry in `IV` corresponds to the inflow vector at the corresponding entry in `IVtimes`
 
 Also return the time (in seconds) the solution took to compute.
 
