@@ -9,7 +9,7 @@ To install `ADM1jl` open the Julia REPL and run the following:
 
 ```
 julia> using Pkg
-julia> Pkg.add("https://github.com/CourtA96/ADM1jl")
+julia> Pkg.add(url="https://github.com/CourtA96/ADM1jl")
 ```
 
 OR enter the Pkg REPL by pressing ] and running:
@@ -35,13 +35,13 @@ Before beginning, make sure that the file `model_parameters.csv` is saved in you
 ```@repl
 using ADM1jl
 
-u0 = ADM1jl.InitialConditions(); # assigns the default initial conditions to u0
+u0 = initialConditions(); # assigns the default initial conditions to u0
 
-IV = ADM1jl.inflowvector_definition(); # assigns the default inflow vector to IV
+IV = inflowvector_definition(); # assigns the default inflow vector to IV
 
 tspan = (0.0,200.0); # the solution will be computed from t=0.0 to t=200.0
 
-sol, tSol = ADM1jl.ADM1sol(tspan,u0,IV); # computes the solution  and saves it to sol, the time to solve is saved to tSol
+sol, tSol = ADM1sol(tspan,u0,IV); # computes the solution  and saves it to sol, the time to solve is saved to tSol
 
 sol # the solution has two fields: t contains the timesteps and u contains the solution at each timestep
 
@@ -51,9 +51,15 @@ tSol # this is the time ExampleSol took to solve the system
 
 The initial conditions and inflow vector can be changed to any `Vector{Float64}` of length 35. For a version of the code that is even more flexible, use `ADM1sol`.
 
-## Modifying Parameters
+### Modifying Parameters
 
 To change the system parameters, such as `T_base` or `P_atm`, just open the file `model_parameters.csv` in your working directory (`model_parameters.csv` can be found [here](https://github.com/CourtA96/ADM1jl/blob/main/model_parameters.csv)). Edit whichever entries are necessary, save, and exit. Running `ADM1sol` again will solve the system with the updated parameters.
+
+## Multiple Reactors in Parallel
+
+To model multiple reactors in series, (ie. where the outflow from the first reactor becomes to inflow to the second, and so on) make sure that there are `model_parameters.csv` files corresponding to each reactor in your working directory. These files should be called `model_parameters.csv`, `model_parameters2.csv`, `model_parameters3.csv`, and so on.
+
+The following code models 3
 
 ## State Variables and their Indices
 

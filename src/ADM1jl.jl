@@ -71,13 +71,13 @@ Compute the pressures of the gasses.
 
 # Examples
 ```jldoctest
-julia> u0 = ADM1jl.initialConditions();
+julia> u0 = initialConditions();
 
-julia> rp = ADM1jl.reactorParameterDefinition();
+julia> rp = reactorParameterDefinition();
 
-julia> php = ADM1jl.physiochemicalParameterDefinition(rp);
+julia> php = physiochemicalParameterDefinition(rp);
 
-julia> ADM1jl.pressureOfGasses(u0,php,rp)
+julia> pressureOfGasses(u0,php,rp)
 5-element Vector{Float64}:
     1.6333471490625e-5
     0.6525381992578124

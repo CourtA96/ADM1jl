@@ -9,4 +9,5 @@ This code has been used in the following paper:
 ## Table of Contents
 
 ```@contents
+Pages = ["page2.md","page3.md"]
 ```

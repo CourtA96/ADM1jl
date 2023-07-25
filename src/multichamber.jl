@@ -179,7 +179,7 @@ function MultiChamberSolution(tspan::Tuple,u0::Tuple,IV::Vector{Vector{Float64}}
 
 end
 
-import ExampleMultiChamberSol
+export ExampleMultiChamberSol
 """
     function ExampleMultiChamberSol(tspan::Tuple,u0::Vector,IV::SciMLBase.ODESolution; <keyword arguments>)
 
