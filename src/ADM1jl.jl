@@ -30,7 +30,7 @@ export petersenmatrixtranspose_definition
 export RHSfunInflowVaried
 export MultiChamberSolutionExample
 export MultiChamberSolution
-import ExampleMultiChamberSol
+export ExampleMultiChamberSol
 export ADM1MultiChamberSol
 
 export inflowvector_definition
