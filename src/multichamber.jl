@@ -1,3 +1,4 @@
+export RHSfunInflowVaried
 """
     RHSfunInflowVaried(du,u,p,t)
 
@@ -54,6 +55,7 @@ end
 ##########################################################
 """
 
+export MultiChamberSolutionExample
 """
     function MultiChamberSolutionExample(tspan::Tuple,u0::Vector,IV::Vector,nChambers::Int64; <keyword arguments>)
 
@@ -68,7 +70,7 @@ and so on.
 
 # Examples
 ```julia-repl
-julia> u0 = ADM1code.InitialConditions();
+julia> u0 = ADM1code.initialConditions();
 
 julia> IV = ADM1code.inflowvector_definition();
 
@@ -104,6 +106,7 @@ function MultiChamberSolutionExample(tspan::Tuple,u0::Tuple,IV::Vector,nChambers
 
 end
 
+export MultiChamberSolution
 """
     function MultiChamberSolution(tspan::Tuple,u0::Vector,IV::Vector,nChambers::Int64; <keyword arguments>)
 
@@ -122,7 +125,7 @@ The names of the .csv files that contain the parameter values should be "model_p
 
 # Examples
 ```julia-repl
-julia> u0 = ADM1code.InitialConditions();
+julia> u0 = ADM1code.initialConditions();
 
 julia> IV = ADM1code.inflowvector_definition();
 
@@ -176,6 +179,7 @@ function MultiChamberSolution(tspan::Tuple,u0::Tuple,IV::Vector{Vector{Float64}}
 
 end
 
+import ExampleMultiChamberSol
 """
     function ExampleMultiChamberSol(tspan::Tuple,u0::Vector,IV::SciMLBase.ODESolution; <keyword arguments>)
 
@@ -191,7 +195,7 @@ Also return the time (in seconds) the solution took to compute.
 
 # Examples
 ```julia-repl
-julia> u0 = ADM1code.InitialConditions();
+julia> u0 = ADM1code.initialConditions();
 
 julia> IV = ADM1code.inflowvector_definition();
 
@@ -260,6 +264,7 @@ function ExampleMultiChamberSol(tspan::Tuple,u0::Vector,IV::SciMLBase.ODESolutio
 
 end
 
+export ADM1MultiChamberSol
 """
     function ADM1MultiChamberSol(tspan::Tuple,u0::Vector,IV::SciMLBase.ODESolution; <keyword arguments>)
 
@@ -276,7 +281,7 @@ Also return the time (in seconds) the solution took to compute. The difference b
 
 # Examples
 ```julia-repl
-julia> u0 = ADM1code.InitialConditions();
+julia> u0 = ADM1code.initialConditions();
 
 julia> IV = ADM1code.inflowvector_definition();
 

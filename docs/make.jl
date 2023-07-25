@@ -1,5 +1,3 @@
-# push!(LOAD_PATH,"C:\\Users\\court\\OneDrive - University of Guelph\\PhD\\Research\\Code\\ADM1jl\\ADM1jl\\src")
-
 using Pkg
 
 Pkg.add("Documenter")
@@ -17,8 +15,7 @@ makedocs(
     ]
 )
 
-deploydocs(
-    repo = "github.com/CourtA96/ADM1jl.git",
-    target = "buildedDoc",
-    push_preview = false,
-)
+# deploydocs(
+#     repo = "github.com/CourtA96/ADM1jl.git",
+#     push_preview = false,
+# )

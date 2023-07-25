@@ -1,24 +1,66 @@
 #parameter_definitions.jl
-
 """
 The functions that define the model parameters:
-   - inflow vector
-   - stoichiometic parameters
-   - carbon content
-   - biochemical parameters
-   - reactor parameters
-   - physiochemical parameters
-   - initial conditions
+   - default initial conditions
+   - default inflow vector
+   - default stoichiometic parameters
+   - default carbon content
+   - default biochemical parameters
+   - default reactor parameters
+   - default physiochemical parameters
 """
 
-"""
-      inflowvector_definition()
 
-Returns the inflow vector.
+export initialConditions
+"""
+      initialConditions()
+
+Returns the default initial conditions as a Vector{Float64} of length 35.
 
 # Examples
 ```jldoctest
-julia> ADM1jl.inflowvector_definition()
+julia> initialConditions()
+35-element Vector{Float64}:
+ 0.012
+ 0.0053
+ ⋮
+ 1.63
+ 0.014
+```
+"""
+function initialConditions()
+   """
+   Function that returns the same initial conditions as used in PyADM1.py
+   """
+
+   # Order of variables:
+   # [
+   # S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4, S_IC, S_IN, S_I,
+   # X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac, X_h2, X_I,
+   # S_va_ion, S_bu_ion, S_pro_ion, S_ac_ion, S_hco3_ion, S_nh3, S_cat, S_an
+   # S_gas_h2, S_gas_ch4, S_gas_co2
+   # ]
+
+   u0 = [
+   0.012, 0.0053, 0.099, 0.012, 0.013, 0.016, 0.2, 2.3e-7, 0.055, 0.15, 0.13, 0.33, # substrates
+   0.31, 0.028, 0.1, 0.029, 0.42, 1.18, 0.24, 0.43, 0.14, 0.76, 0.32, 25.6, # biomass
+   0.011, 0.013, 0.016, 0.2, 0.14, 0.0041, 0.040, 0.020, # ions
+   1.02e-5, 1.63, 0.014 # gas
+   ]
+
+   return u0
+
+end
+
+export inflowvector_definition
+"""
+      inflowvector_definition()
+
+Returns the default inflow vector as a Vector{Float64} of length 35.
+
+# Examples
+```jldoctest
+julia> inflowvector_definition()
 35-element Vector{Float64}:
  0.01
  0.001
@@ -66,6 +108,7 @@ julia> ADM1jl.inflowvector_definition()
    return IV
 end
 
+export stoichiometricparameter_definition
 @memoize function stoichiometricparameter_definition()
    """
       In the order that they are presented in Table 6.1 of ADM1
@@ -85,6 +128,7 @@ end
    return SP
 end
 
+export carbonContent_definition
 @memoize function carbonContent_definition()
    """
       In order of i. Values are given in Table 2.6 of ADM1
@@ -101,6 +145,7 @@ end
    return CC
 end
 
+export biochemicalparameter_definition
 @memoize function biochemicalparameter_definition()
    """
     In the order that they are presented in Table 6.2 of ADM1
@@ -135,6 +180,7 @@ end
    return BP
 end
 
+export reactorParameterDefinition
 @memoize function reactorParameterDefinition()
    """
    List of parameters that relate to the reactor itself.
@@ -165,6 +211,7 @@ end
 
 end
 
+export physiochemicalParameterDefinition
 @memoize function physiochemicalParameterDefinition(rp::Vector{Float64})
    """
    Parameters from tables 4.1 and 4.2. Some parameters are not specified by ADM1 and are taken from the BSM2, which can be found at: http://iwa-mia.org/benchmarking/#BSM2
@@ -212,6 +259,7 @@ end
    return PhP
 end
 
+export computePhysiochemicalParameterDefinition
 @memoize function computePhysiochemicalParameterDefinition(rp::Vector{Float64},php::Vector{Float64})
    """
    Overloaded method.
@@ -262,28 +310,4 @@ end
    ]
 
    return PhP
-end
-
-function InitialConditions()
-   """
-   Function that returns the same initial conditions as used in PyADM1.py
-   """
-
-   # Order of variables:
-   # [
-   # S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4, S_IC, S_IN, S_I,
-   # X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac, X_h2, X_I,
-   # S_va_ion, S_bu_ion, S_pro_ion, S_ac_ion, S_hco3_ion, S_nh3, S_cat, S_an
-   # S_gas_h2, S_gas_ch4, S_gas_co2
-   # ]
-
-   u0 = [
-   0.012, 0.0053, 0.099, 0.012, 0.013, 0.016, 0.2, 2.3e-7, 0.055, 0.15, 0.13, 0.33, # substrates
-   0.31, 0.028, 0.1, 0.029, 0.42, 1.18, 0.24, 0.43, 0.14, 0.76, 0.32, 25.6, # biomass
-   0.011, 0.013, 0.016, 0.2, 0.14, 0.0041, 0.040, 0.020, # ions
-   1.02e-5, 1.63, 0.014 # gas
-   ]
-
-   return u0
-
 end
