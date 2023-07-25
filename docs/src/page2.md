@@ -55,11 +55,59 @@ The initial conditions and inflow vector can be changed to any `Vector{Float64}`
 
 To change the system parameters, such as `T_base` or `P_atm`, just open the file `model_parameters.csv` in your working directory (`model_parameters.csv` can be found [here](https://github.com/CourtA96/ADM1jl/blob/main/model_parameters.csv)). Edit whichever entries are necessary, save, and exit. Running `ADM1sol` again will solve the system with the updated parameters.
 
+### Variable Inflow
+
+To solve the system for variable inflow, specify the inflow as a `Vector{Vector{Float}}`, ie. as a vector that contains the vector of inflow conditions at a different times, these times are indexed by an additional input vector `t`.
+
+The `ADM1sol` function interpolates the function using the `interpolate` function from the `Interpolations` package. 
+
+The following code breaks the timespan into 0.1 day increments and then randomizes the inflow concentrations within 50 percent of the default values every 0.1 days. The system is then solved for these randomly varied inflow vectors.
+
+```@repl
+using ADM1jl
+
+u0 = initialConditions(); # the default initial conditions
+
+tspan = (0.0,50.0); # The timespan of the solution is 50 days
+
+t = [i for i in tspan[1]:0.1:tspan[2]]; # Break the timespan into 0.1 day increments
+
+IV_temp = inflowvector_definition(); # temporary inflow vector
+
+IV = [IV_temp*(0.5*rand()+1.0) for i in 1:length(t)] # for each time in t, vary the inflow concentrations within 50 percent of their default values
+
+sol,tSol = ADM1sol((0.0,50.0),u0,IV,t); # solve the system
+
+sol # The solution
+
+tSol # the time it took to solve
+
+```
+
 ## Multiple Reactors in Parallel
 
 To model multiple reactors in series, (ie. where the outflow from the first reactor becomes to inflow to the second, and so on) make sure that there are `model_parameters.csv` files corresponding to each reactor in your working directory. These files should be called `model_parameters.csv`, `model_parameters2.csv`, `model_parameters3.csv`, and so on.
 
-The following code models 3
+To solve multiple reactors, use the `MultiChamberSolution` function, which takes the timespan, initial conditions for each reactor, the inflow vector, and the number of reactors as input. The timespan is specified the same as in `ADM1sol`, the initial conditions are specified as a `Tuple` of vectors where each vector is the initial conditions for one of the reactors, and the inflow vector is specified the same as in `ADM1sol`.
+
+The following code models three reactors in series. Each of the reactors has the same initial conditions.
+
+```@repl
+using ADM1jl
+
+u0 = initialConditions(); # default initial conditions
+
+IV = inflowvector_definition(); # default inflow vector
+
+sols = MultiChamberSolution((0.0,200.0),(u0,u0,u0),IV,3); # solve the three reactors
+
+sols[1] # solution to first reactor
+
+sols[2] # solution to second reactor
+
+sols[3] # solution to third reactor
+```
+
 
 ## State Variables and their Indices
 

@@ -57,7 +57,7 @@ end
 
 export MultiChamberSolutionExample
 """
-    function MultiChamberSolutionExample(tspan::Tuple,u0::Vector,IV::Vector,nChambers::Int64; <keyword arguments>)
+    function MultiChamberSolutionExample(tspan::Tuple,u0::Tuple,IV::Vector,nChambers::Int64; <keyword arguments>)
 
 Compute the solution for a system of `nChambers` connected CSTRs with `u0` initial conditions. The 
 inflow of the first CSTR is given by `IV`, the outflow of the first CSTR becomes the inflow of second CSTR 
@@ -74,7 +74,7 @@ julia> u0 = ADM1code.initialConditions();
 
 julia> IV = ADM1code.inflowvector_definition();
 
-julia> sol, tSol = ADM1code.ExampleMultiChamberSol((0.0,200.0),u0,IV);
+julia> sol, tSol = ADM1code.ExampleMultiChamberSol((0.0,200.0),u0,IV,3);
 
 julia> sol
 retcode: Success
@@ -108,7 +108,7 @@ end
 
 export MultiChamberSolution
 """
-    function MultiChamberSolution(tspan::Tuple,u0::Vector,IV::Vector,nChambers::Int64; <keyword arguments>)
+    function MultiChamberSolution(tspan::Tuple,u0::Tuple,IV::Vector,nChambers::Int64; <keyword arguments>)
 
 Compute the solution for a system of `nChambers` connected CSTRs with `u0` initial conditions. The 
 inflow of the first CSTR is given by `IV`, the outflow of the first CSTR becomes the inflow of second CSTR 
@@ -125,23 +125,42 @@ The names of the .csv files that contain the parameter values should be "model_p
 
 # Examples
 ```julia-repl
-julia> u0 = ADM1code.initialConditions();
+julia> u0 = initialConditions();
 
-julia> IV = ADM1code.inflowvector_definition();
+julia> IV = inflowvector_definition();
 
-julia> sol, tSol = ADM1code.ExampleMultiChamberSol((0.0,200.0),u0,IV);
+julia> sols = MultiChamberSolution((0.0,200.0),(u0,u0,u0),IV,3);
+Finished Chamber 1
+Finished Chamber 2
+Finished Chamber 3
 
-julia> sol
+julia> sols[1]
 retcode: Success
 Interpolation: specialized 3rd order "free" stiffness-aware interpolation
-t: 146-element Vector{Float64}:
+t: 115-element Vector{Float64}:
 [...]
 
-u: 146-element Vector{Vector{Float64}}:
+u: 115-element Vector{Vector{Float64}}:
 [...]
 
-julia> tSol
-0.3854937
+julia> sols[2]
+retcode: Success
+Interpolation: specialized 3rd order "free" stiffness-aware interpolation
+t: 115-element Vector{Float64}:
+[...]
+
+u: 115-element Vector{Vector{Float64}}:
+[...]
+
+julia> sols[3]
+retcode: Success
+Interpolation: specialized 3rd order "free" stiffness-aware interpolation
+t: 115-element Vector{Float64}:
+[...]
+
+u: 115-element Vector{Vector{Float64}}:
+[...]
+```
 """
 function MultiChamberSolution(tspan::Tuple,u0::Tuple,IV::Vector,nChambers::Int64;alg = Rodas4P(), tols=1e-4,tMax = 300.0)
     
