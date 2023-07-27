@@ -3,11 +3,18 @@
 CurrentModule = ADM1jl
 ```
 
-## Functions
+## Single Reactor Solvers
 
 ```@docs
-ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Float64};alg = Rodas4P(), tols=1e-4,tMax = 300.0)
+ADM1sol
 ```
+
+## Multiple Reactor Solvers
+
+```@docs
+MultiChamberSolution
+```
+## Other Functions
 
 ```@docs
 RHSfun(du,u,p,t)

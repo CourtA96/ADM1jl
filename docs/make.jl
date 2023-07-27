@@ -1,7 +1,3 @@
-using Pkg
-
-Pkg.add("Documenter")
-
 using Documenter, ADM1jl
 
 makedocs(

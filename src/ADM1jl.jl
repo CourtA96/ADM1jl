@@ -30,7 +30,7 @@ export petersenmatrixtranspose_definition
 export RHSfunInflowVaried
 export MultiChamberSolutionExample
 export MultiChamberSolution
-import ExampleMultiChamberSol
+export ExampleMultiChamberSol
 export ADM1MultiChamberSol
 
 export inflowvector_definition
@@ -71,13 +71,13 @@ Compute the pressures of the gasses.
 
 # Examples
 ```jldoctest
-julia> u0 = ADM1jl.initialConditions();
+julia> u0 = initialConditions();
 
-julia> rp = ADM1jl.reactorParameterDefinition();
+julia> rp = reactorParameterDefinition();
 
-julia> php = ADM1jl.physiochemicalParameterDefinition(rp);
+julia> php = physiochemicalParameterDefinition(rp);
 
-julia> ADM1jl.pressureOfGasses(u0,php,rp)
+julia> pressureOfGasses(u0,php,rp)
 5-element Vector{Float64}:
     1.6333471490625e-5
     0.6525381992578124
@@ -121,11 +121,11 @@ If `u <= 0` return `0`.
 
 # Examples
 ```jldoctest
-julia> ADM1jl.monod(3.0,2.0) # when u is non-zero positive
+julia> monod(3.0,2.0) # when u is non-zero positive
 0.6
 ```
 ```jldoctest
-julia> ADM1jl.monod(-3.0,2.0) # when u is negative
+julia> monod(-3.0,2.0) # when u is negative
 0
 ```
 
@@ -155,19 +155,19 @@ Compute and return the vector of reaction rates.
 
 # Examples
 ```jldoctest
-julia> u0 = ADM1jl.initialConditions();
+julia> u0 = initialConditions();
 
-julia> bp = ADM1jl.biochemicalparameter_definition();
+julia> bp = biochemicalparameter_definition();
 
-julia> rp = ADM1jl.reactorParameterDefinition();
+julia> rp = reactorParameterDefinition();
 
-julia> php = ADM1jl.physiochemicalParameterDefinition(rp);
+julia> php = physiochemicalParameterDefinition(rp);
 
-julia> pressures = ADM1jl.pressureOfGasses(u0,php,rp);
+julia> pressures = pressureOfGasses(u0,php,rp);
 
 julia> NREAC = 29;
 
-julia> ADM1jl.reactionrates(bp,rp,php,pressures,u0,NREAC)
+julia> reactionrates(bp,rp,php,pressures,u0,NREAC)
 29-element Vector{Real}:
  0.155
  0.28
@@ -433,11 +433,11 @@ Also return the time (in seconds) the solution took to compute.
 
 # Examples
 ```julia-repl
-julia> u0 = ADM1jl.initialConditions();
+julia> u0 = initialConditions();
 
-julia> IV = ADM1jl.inflowvector_definition();
+julia> IV = inflowvector_definition();
 
-julia> sol, tSol = ADM1jl.ExampleSol((0.0,200.0),u0,IV);
+julia> sol, tSol = ExampleSol((0.0,200.0),u0,IV);
 
 julia> sol
 retcode: Success
@@ -624,7 +624,7 @@ end
     function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Vector{Float64}},IVtimes::Vector{Float64}; <keyword arguments>)
 
 Compute the solution with variable inflow for the given timespan, `tspan`; initial condition, `u0`; and variable inflow vector 
-`IV` where each entry in IV corresponds to the inflow vector at the corresponding entry in `IVtimes`
+`IV` where each entry in `IV` corresponds to the inflow vector at the corresponding entry in `IVtimes`
 
 Also return the time (in seconds) the solution took to compute.
 
@@ -635,15 +635,15 @@ Also return the time (in seconds) the solution took to compute.
 
 # Examples
 ```julia-repl
-julia> u0 = ADM1jl.initialConditions();
+julia> u0 = initialConditions();
 
-julia> t = [i for i in 0.0:0.1:50.0]
+julia> t = [i for i in 0.0:0.1:50.0];
 
-julia> IV_temp = ADM1jl.inflowvector_definition();
+julia> IV_temp = inflowvector_definition();
 
 julia> IV = [IV_temp*(0.5*rand()+1.0) for i in 1:length(t)]
 
-julia> sol,tSol = ADM1jl.ADM1sol((0.0,50.0),u0,IV,t);
+julia> sol,tSol = ADM1sol((0.0,50.0),u0,IV,t);
 
 julia> sol
 retcode: Success
@@ -656,7 +656,6 @@ u: 2011-element Vector{Vector{Float64}}:
 
 julia> tSol
 14.4643811
-
 ```
 """
 function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Vector{Float64}},IVtimes::Vector{Float64};alg = Rodas4P(), tols=1e-4,tMax = 300.0)
@@ -727,7 +726,7 @@ function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Vector{Float64}},IVtimes::Ve
 
    IV_vecs = [[IV[i][j] for i in 1:length(IV)] for j in 1:35]
 
-   global inflowFunctions = [interpolate((IVtimes,),IV_vecs[i],Gridded(Constant())) for i in 1:length(IV[1])]
+   global inflowFunctions = [interpolate((IVtimes,),IV_vecs[i],Gridded(Linear())) for i in 1:length(IV[1])]
 
    prob=ODEProblem(RHSfunInflowVaried,u0,tspan,parm)
 
