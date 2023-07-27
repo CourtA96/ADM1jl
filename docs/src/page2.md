@@ -123,6 +123,40 @@ sols[2] # solution to second reactor
 sols[3] # solution to third reactor
 ```
 
+### Variable Inflow
+
+To specify variable inflow to the first reactor in the series, the input is much the same as in the `ADM1sol` case:
+
+```@repl
+using ADM1jl
+
+u0 = initialConditions();
+
+t = [i for i in 0.0:0.1:50.0];
+
+IV_temp = inflowvector_definition();
+
+IV = [IV_temp*(0.5*rand()+1.0) for i in 1:length(t)];
+
+sols = MultiChamberSolution((0.0,50.0),(u0,u0,u0),IV,t,3);
+```
+
+## Plotting
+
+```@repl
+using ADM1jl
+
+u0 = initialConditions(); # assigns the default initial conditions to u0
+
+IV = inflowvector_definition(); # assigns the default inflow vector to IV
+
+tspan = (0.0,200.0); # the solution will be computed from t=0.0 to t=200.0
+
+sol, tSol = ADM1sol(tspan,u0,IV); # compute the solution
+
+plotSols(sol)
+```
+
 
 ## State Variables and their Indices
 

@@ -204,7 +204,7 @@ julia> t = [i for i in 0.0:0.1:50.0];
 
 julia> IV_temp = inflowvector_definition();
 
-julia> IV = [IV_temp*(0.5*rand()+1.0) for i in 1:length(t)]
+julia> IV = [IV_temp*(0.5*rand()+1.0) for i in 1:length(t)];
 
 julia> sols = MultiChamberSolution((0.0,50.0),(u0,u0,u0),IV,t,3);
 Finished Chamber 1
