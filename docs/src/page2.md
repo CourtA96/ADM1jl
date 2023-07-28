@@ -68,7 +68,7 @@ IV = inflowvector_definition();
 
 sol,tSol = ADM1sol((0.0,50.0),u0,IV, alg = Rosenbrock23()); # solve the system using the Rosenbrock23 algorithm
 ```
-In principle, any ODE solver specified in the `DifferentialEquations` [documentation](https://docs.sciml.ai/DiffEqDocs/stable/solvers/ode_solve/) can be used to solve the system. However, ADM1 is a stiff system of equations, so many solvers may not be stable.
+In principle, any ODE solver listed in the `DifferentialEquations` [documentation](https://docs.sciml.ai/DiffEqDocs/stable/solvers/ode_solve/) can be used to solve the system. However, ADM1 is a stiff system of equations, so many solvers may not be stable.
 
 ### Variable Inflow
 
