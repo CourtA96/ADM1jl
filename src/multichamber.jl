@@ -122,6 +122,7 @@ The names of the .csv files that contain the parameter values should be "model_p
 - `alg = Rodas4P()`: the ODE solver algorithm.
 - `tols = 1e-4`: the absolute and relative tolerance of the solver method.
 - `tMax = 300.0`: the maximum time (in seconds), that the function will run before timing out.
+- `saveAt = []`: specific times to save the solution. If given a number `n`, the solver will save the solution every `n` timesteps
 
 # Examples
 ```julia-repl
@@ -162,17 +163,17 @@ u: 115-element Vector{Vector{Float64}}:
 [...]
 ```
 """
-function MultiChamberSolution(tspan::Tuple,u0::Tuple,IV::Vector,nChambers::Int64;alg = Rodas4P(), tols=1e-4,tMax = 300.0)
+function MultiChamberSolution(tspan::Tuple,u0::Tuple,IV::Vector,nChambers::Int64;alg = Rodas4P(), tols=1e-4,tMax = 300.0,saveAt=[])
     
     sols = Vector{Any}(undef,nChambers)
 
-    sols[1] = ADM1sol(tspan,u0[1],IV,alg=alg,tols=tols,tMax=tMax)[1]
+    sols[1] = ADM1sol(tspan,u0[1],IV,alg=alg,tols=tols,tMax=tMax,saveAt=saveAt)[1]
 
     println("Finished Chamber 1")
 
     for i in 2:nChambers
         filename = string("model_parameters",i,".csv")
-        sols[i] = ADM1MultiChamberSol(tspan,u0[i],sols[i-1],paramFilename = filename,alg=alg,tols=tols,tMax=tMax)[1]
+        sols[i] = ADM1MultiChamberSol(tspan,u0[i],sols[i-1],paramFilename = filename,alg=alg,tols=tols,tMax=tMax,saveAt=saveAt)[1]
         println("Finished Chamber ",i)
     end
 
@@ -195,6 +196,7 @@ The names of the .csv files that contain the parameter values should be "model_p
 - `alg = Rodas4P()`: the ODE solver algorithm.
 - `tols = 1e-4`: the absolute and relative tolerance of the solver method.
 - `tMax = 300.0`: the maximum time (in seconds), that the function will run before timing out.
+- `saveAt = []`: specific times to save the solution. If given a number `n`, the solver will save the solution every `n` timesteps
 
 # Examples
 ```julia-repl
@@ -239,17 +241,17 @@ u: 115-element Vector{Vector{Float64}}:
 [...]
 ```
 """
-function MultiChamberSolution(tspan::Tuple,u0::Tuple,IV::Vector{Vector{Float64}},IVtimes::Vector{Float64},nChambers::Int64;alg = Rodas4P(), tols=1e-4,tMax = 300.0)
+function MultiChamberSolution(tspan::Tuple,u0::Tuple,IV::Vector{Vector{Float64}},IVtimes::Vector{Float64},nChambers::Int64;alg = Rodas4P(), tols=1e-4,tMax = 300.0,saveAt=[])
     
     sols = Vector{Any}(undef,nChambers)
 
-    sols[1] = ADM1sol(tspan,u0[1],IV,IVtimes,alg=alg,tols=tols,tMax=tMax)[1]
+    sols[1] = ADM1sol(tspan,u0[1],IV,IVtimes,alg=alg,tols=tols,tMax=tMax,saveAt=saveAt)[1]
 
     println("Finished Chamber 1")
 
     for i in 2:nChambers
         filename = string("model_parameters",i,".csv")
-        sols[i] = ADM1MultiChamberSol(tspan,u0[i],sols[i-1],paramFilename = filename,alg=alg,tols=tols,tMax=tMax)[1]
+        sols[i] = ADM1MultiChamberSol(tspan,u0[i],sols[i-1],paramFilename = filename,alg=alg,tols=tols,tMax=tMax,saveAt=saveAt)[1]
         println("Finished Chamber ",i)
     end
 
@@ -356,6 +358,7 @@ Also return the time (in seconds) the solution took to compute. The difference b
 - `alg = Rodas4P()`: the ODE solver algorithm.
 - `tols = 1e-4`: the absolute and relative tolerance of the solver method.
 - `tMax = 300.0`: the maximum time (in seconds), that the function will run before timing out.
+- `saveAt = []`: specific times to save the solution. If given a number `n`, the solver will save the solution every `n` timesteps
 
 # Examples
 ```julia-repl
@@ -378,7 +381,7 @@ julia> tSol
 0.3854937
 ```
 """
-function ADM1MultiChamberSol(tspan::Tuple,u0::Vector,IV::SciMLBase.ODESolution; paramFilename = "model_parameters.csv", alg = Rodas4P(), tols=1e-4,tMax = 300.0)
+function ADM1MultiChamberSol(tspan::Tuple,u0::Vector,IV::SciMLBase.ODESolution; paramFilename = "model_parameters.csv", alg = Rodas4P(), tols=1e-4,tMax = 300.0,saveAt=[])
    
    # Combine all of the parameter vectors into one vector (parm) for the solver.
 
@@ -456,7 +459,7 @@ function ADM1MultiChamberSol(tspan::Tuple,u0::Vector,IV::SciMLBase.ODESolution; 
    global sol = "not defined"
 
    try
-      global t = @timed sol = solve(prob,alg, abstol=tols,reltol=tols)
+      global t = @timed sol = solve(prob,alg, abstol=tols,reltol=tols,saveat=saveAt)
    catch e
       printstyled(stderr,"\nERROR: ", bold=true, color=:red)
       printstyled(stderr,sprint(showerror,e), color=:light_red)

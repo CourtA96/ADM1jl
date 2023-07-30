@@ -290,6 +290,7 @@ Also return the time (in seconds) the solution took to compute. The difference b
 - `alg = Rodas4P()`: the ODE solver algorithm.
 - `tols = 1e-4`: the absolute and relative tolerance of the solver method.
 - `tMax = 300.0`: the maximum time (in seconds), that the function will run before timing out.
+- `saveAt = []`: specific times to save the solution. If given a number `n`, the solver will save the solution every `n` timesteps
 
 # Examples
 ```julia-repl
@@ -312,7 +313,7 @@ julia> tSol
 0.3854937
 ```
 """
-function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Float64};alg = Rodas4P(), tols=1e-4,tMax = 300.0)
+function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Float64}; alg = Rodas4P(), tols=1e-4, tMax = 300.0, saveAt=[])
    
    # Combine all of the parameter vectors into one vector (parm) for the solver.
 
@@ -384,7 +385,7 @@ function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Float64};alg = Rodas4P(), to
    global sol = "not defined"
 
    try
-      global t = @timed sol = solve(prob,alg, abstol=tols,reltol=tols)
+      global t = @timed sol = solve(prob,alg, abstol=tols,reltol=tols,saveat=saveAt)
    catch e
       printstyled(stderr,"\nERROR: ", bold=true, color=:red)
       printstyled(stderr,sprint(showerror,e), color=:light_red)
@@ -414,6 +415,7 @@ Also return the time (in seconds) the solution took to compute.
 - `alg = Rodas4P()`: the ODE solver algorithm.
 - `tols = 1e-4`: the absolute and relative tolerance of the solver method.
 - `tMax = 300.0`: the maximum time (in seconds), that the function will run before timing out.
+- `saveAt = []`: specific times to save the solution. If given a number `n`, the solver will save the solution every `n` timesteps
 
 # Examples
 ```julia-repl
@@ -440,7 +442,7 @@ julia> tSol
 14.4643811
 ```
 """
-function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Vector{Float64}},IVtimes::Vector{Float64};alg = Rodas4P(), tols=1e-4,tMax = 300.0)
+function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Vector{Float64}},IVtimes::Vector{Float64}; alg = Rodas4P(), tols=1e-4, tMax = 300.0, saveAt=[])
    
    # Combine all of the parameter vectors into one vector (parm) for the solver.
 
@@ -515,7 +517,7 @@ function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Vector{Float64}},IVtimes::Ve
    global sol = "not defined"
 
    try
-      global t = @timed sol = solve(prob,alg, abstol=tols,reltol=tols)
+      global t = @timed sol = solve(prob,alg, abstol=tols,reltol=tols, saveat=saveAt)
    catch e
       printstyled(stderr,"\nERROR: ", bold=true, color=:red)
       printstyled(stderr,sprint(showerror,e), color=:light_red)
