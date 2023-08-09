@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>List of Functions · ADM1jl</title><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.045/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.24/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><a class="docs-logo" href="../"><img src="../assets/logo.png" alt="ADM1jl logo"/></a><div class="docs-package-name"><span class="docs-autofit"><a href="../">ADM1jl</a></span></div><form class="docs-search" action="../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../">Home</a></li><li><span class="tocitem">Manual</span><ul><li><a class="tocitem" href="../page2/">Getting started</a></li><li class="is-active"><a class="tocitem" href>List of Functions</a><ul class="internal"><li><a class="tocitem" href="#Functions"><span>Functions</span></a></li></ul></li></ul></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Manual</a></li><li class="is-active"><a href>List of Functions</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>List of Functions</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/CourtA96/ADM1jl/blob/main/docs/src/page3.md" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="List-of-Functions"><a class="docs-heading-anchor" href="#List-of-Functions">List of Functions</a><a id="List-of-Functions-1"></a><a class="docs-heading-anchor-permalink" href="#List-of-Functions" title="Permalink"></a></h1><h2 id="Functions"><a class="docs-heading-anchor" href="#Functions">Functions</a><a id="Functions-1"></a><a class="docs-heading-anchor-permalink" href="#Functions" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="ADM1jl.ADM1sol-Tuple{Tuple, Vector, Vector{Float64}}" href="#ADM1jl.ADM1sol-Tuple{Tuple, Vector, Vector{Float64}}"><code>ADM1jl.ADM1sol</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia hljs">function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector; &lt;keyword arguments&gt;)</code></pre><p>Compute the solution for the given timespan, <code>tspan</code>; initial condition, <code>u0</code>; and inflow vector <code>IV</code>.</p><p>Also return the time (in seconds) the solution took to compute. The difference between this function and ExampleSol is that this function reads in the parameter values from a .csv file.</p><p><strong>Optional Arguments</strong></p><ul><li><code>alg = Rodas4P()</code>: the ODE solver algorithm.</li><li><code>tols = 1e-4</code>: the absolute and relative tolerance of the solver method.</li><li><code>tMax = 300.0</code>: the maximum time (in seconds), that the function will run before timing out.</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; u0 = ADM1jl.InitialConditions();
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>List of Functions · ADM1jl</title><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><a class="docs-logo" href="../"><img src="../assets/logo.png" alt="ADM1jl logo"/></a><div class="docs-package-name"><span class="docs-autofit">ADM1jl</span></div><form class="docs-search" action="../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../">Home</a></li><li><span class="tocitem">Manual</span><ul><li><a class="tocitem" href="../page2/">Getting started</a></li><li class="is-active"><a class="tocitem" href>List of Functions</a><ul class="internal"><li><a class="tocitem" href="#Single-Reactor-Solvers"><span>Single Reactor Solvers</span></a></li><li><a class="tocitem" href="#Multiple-Reactor-Solvers"><span>Multiple Reactor Solvers</span></a></li><li><a class="tocitem" href="#Other-Functions"><span>Other Functions</span></a></li></ul></li></ul></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Manual</a></li><li class="is-active"><a href>List of Functions</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>List of Functions</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/CourtA96/ADM1jl/blob/master/docs/src/page3.md" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="List-of-Functions"><a class="docs-heading-anchor" href="#List-of-Functions">List of Functions</a><a id="List-of-Functions-1"></a><a class="docs-heading-anchor-permalink" href="#List-of-Functions" title="Permalink"></a></h1><h2 id="Single-Reactor-Solvers"><a class="docs-heading-anchor" href="#Single-Reactor-Solvers">Single Reactor Solvers</a><a id="Single-Reactor-Solvers-1"></a><a class="docs-heading-anchor-permalink" href="#Single-Reactor-Solvers" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="ADM1jl.ADM1sol" href="#ADM1jl.ADM1sol"><code>ADM1jl.ADM1sol</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector; &lt;keyword arguments&gt;)</code></pre><p>Compute the solution for the given timespan, <code>tspan</code>; initial condition, <code>u0</code>; and inflow vector <code>IV</code>.</p><p>Also return the time (in seconds) the solution took to compute. The difference between this function and ExampleSol is that this function reads in the parameter values from a .csv file.</p><p><strong>Optional Arguments</strong></p><ul><li><code>alg = Rodas4P()</code>: the ODE solver algorithm.</li><li><code>tols = 1e-4</code>: the absolute and relative tolerance of the solver method.</li><li><code>tMax = 300.0</code>: the maximum time (in seconds), that the function will run before timing out.</li><li><code>saveAt = []</code>: specific times to save the solution. If given a number <code>n</code>, the solver will save the solution every <code>n</code> timesteps</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl">julia&gt; u0 = initialConditions();
 
-julia&gt; IV = ADM1jl.inflowvector_definition();
+julia&gt; IV = inflowvector_definition();
 
-julia&gt; sol, tSol = ADM1jl.ADM1sol((0.0,200.0),u0,IV);
+julia&gt; sol, tSol = ADM1sol((0.0,200.0),u0,IV);
 
 julia&gt; sol
 retcode: Success
@@ -15,19 +15,111 @@ u: 146-element Vector{Vector{Float64}}:
 [...]
 
 julia&gt; tSol
-0.3854937</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/CourtA96/ADM1jl/blob/cab24242953246a8ed8666cbae659b1bb0f25c1c/src/ADM1jl.jl#L474-L506">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="ADM1jl.RHSfun-NTuple{4, Any}" href="#ADM1jl.RHSfun-NTuple{4, Any}"><code>ADM1jl.RHSfun</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia hljs">RHSfun(du,u,p,t)</code></pre><p>Return the right-hand side of the system of ODEs, this is an in-place function.</p><p><strong>Arguments</strong></p><ul><li><code>du::Vector</code>: the rate change of the state vector (required since the function is defined in-place).</li><li><code>u::Vector</code>: the state vector.</li><li><code>p::Vector</code>: all of the model parameters.</li><li><code>t</code>: the timestep, usually a Float64.</li></ul></div><a class="docs-sourcelink" target="_blank" href="https://github.com/CourtA96/ADM1jl/blob/cab24242953246a8ed8666cbae659b1bb0f25c1c/src/ADM1jl.jl#L339-L349">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="ADM1jl.reactionrates-Tuple{Any, Any, Any, Any, Any, Int64}" href="#ADM1jl.reactionrates-Tuple{Any, Any, Any, Any, Any, Int64}"><code>ADM1jl.reactionrates</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia hljs">reactionrates(bp,rp,php,pressures,sx,NREAC::Int)</code></pre><p>Compute and return the vector of reaction rates.</p><p><strong>Arguments</strong></p><ul><li><code>bp::Vector</code>: the biochemical parameters.</li><li><code>rp::Vector</code>: the reactor parameters.</li><li><code>php::Vector</code>: the physiochemical parameters.</li><li><code>pressures::Vector</code>: the gas pressures.</li><li><code>sx::Vector</code>: the state vector.</li><li><code>NREAC::Integer</code>: the number of reaction rates.</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; u0 = ADM1jl.InitialConditions();
+0.3854937</code></pre></div></section><section><div><pre><code class="language-none">function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Vector{Float64}},IVtimes::Vector{Float64}; &lt;keyword arguments&gt;)</code></pre><p>Compute the solution with variable inflow for the given timespan, <code>tspan</code>; initial condition, <code>u0</code>; and variable inflow vector  <code>IV</code> where each entry in <code>IV</code> corresponds to the inflow vector at the corresponding entry in <code>IVtimes</code></p><p>Also return the time (in seconds) the solution took to compute.</p><p><strong>Optional Arguments</strong></p><ul><li><code>alg = Rodas4P()</code>: the ODE solver algorithm.</li><li><code>tols = 1e-4</code>: the absolute and relative tolerance of the solver method.</li><li><code>tMax = 300.0</code>: the maximum time (in seconds), that the function will run before timing out.</li><li><code>saveAt = []</code>: specific times to save the solution. If given a number <code>n</code>, the solver will save the solution every <code>n</code> timesteps</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl">julia&gt; u0 = initialConditions();
 
-julia&gt; bp = ADM1jl.biochemicalparameter_definition();
+julia&gt; t = [i for i in 0.0:0.1:50.0];
 
-julia&gt; rp = ADM1jl.reactorParameterDefinition();
+julia&gt; IV_temp = inflowvector_definition();
 
-julia&gt; php = ADM1jl.physiochemicalParameterDefinition(rp);
+julia&gt; IV = [IV_temp*(0.5*rand()+1.0) for i in 1:length(t)]
 
-julia&gt; pressures = ADM1jl.pressureOfGasses(u0,php,rp);
+julia&gt; sol,tSol = ADM1sol((0.0,50.0),u0,IV,t);
+
+julia&gt; sol
+retcode: Success
+Interpolation: specialized 3rd order &quot;free&quot; stiffness-aware interpolation
+t: 2011-element Vector{Float64}:
+[...]
+
+u: 2011-element Vector{Vector{Float64}}:
+[...]
+
+julia&gt; tSol
+14.4643811</code></pre></div></section></article><h2 id="Multiple-Reactor-Solvers"><a class="docs-heading-anchor" href="#Multiple-Reactor-Solvers">Multiple Reactor Solvers</a><a id="Multiple-Reactor-Solvers-1"></a><a class="docs-heading-anchor-permalink" href="#Multiple-Reactor-Solvers" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="ADM1jl.MultiChamberSolution" href="#ADM1jl.MultiChamberSolution"><code>ADM1jl.MultiChamberSolution</code></a> — <span class="docstring-category">Function</span></header><section><div><pre><code class="language-julia">function MultiChamberSolution(tspan::Tuple,u0::Tuple,IV::Vector,nChambers::Int64; &lt;keyword arguments&gt;)</code></pre><p>Compute the solution for a system of <code>nChambers</code> connected CSTRs with <code>u0</code> initial conditions. The  inflow of the first CSTR is given by <code>IV</code>, the outflow of the first CSTR becomes the inflow of second CSTR  and so on.</p><p>This function reads in the parameter values from a .csv file. The names of the .csv files that contain the parameter values should be &quot;model<em>parameters.csv&quot;, &quot;model</em>parameters2.csv&quot;,  &quot;model_parameters3.csv&quot;, ... and so on.</p><p><strong>Arguments</strong></p><ul><li><code>alg = Rodas4P()</code>: the ODE solver algorithm.</li><li><code>tols = 1e-4</code>: the absolute and relative tolerance of the solver method.</li><li><code>tMax = 300.0</code>: the maximum time (in seconds), that the function will run before timing out.</li><li><code>saveAt = []</code>: specific times to save the solution. If given a number <code>n</code>, the solver will save the solution every <code>n</code> timesteps</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl">julia&gt; u0 = initialConditions();
+
+julia&gt; IV = inflowvector_definition();
+
+julia&gt; sols = MultiChamberSolution((0.0,200.0),(u0,u0,u0),IV,3);
+Finished Chamber 1
+Finished Chamber 2
+Finished Chamber 3
+
+julia&gt; sols[1]
+retcode: Success
+Interpolation: specialized 3rd order &quot;free&quot; stiffness-aware interpolation
+t: 115-element Vector{Float64}:
+[...]
+
+u: 115-element Vector{Vector{Float64}}:
+[...]
+
+julia&gt; sols[2]
+retcode: Success
+Interpolation: specialized 3rd order &quot;free&quot; stiffness-aware interpolation
+t: 115-element Vector{Float64}:
+[...]
+
+u: 115-element Vector{Vector{Float64}}:
+[...]
+
+julia&gt; sols[3]
+retcode: Success
+Interpolation: specialized 3rd order &quot;free&quot; stiffness-aware interpolation
+t: 115-element Vector{Float64}:
+[...]
+
+u: 115-element Vector{Vector{Float64}}:
+[...]</code></pre></div></section><section><div><pre><code class="language-none">function MultiChamberSolution(tspan::Tuple,u0::Tuple,IV::Vector{Vector{Float64}},IVtimes::Vector{Float64},nChambers::Int64;&lt;keyword arguments&gt;)</code></pre><p>Compute the solution for a system of <code>nChambers</code> connected CSTRs with <code>u0</code> initial conditions. The  inflow of the first CSTR is given by variable inflow vector <code>IV</code> where each entry in <code>IV</code> corresponds to the inflow vector at the corresponding entry in <code>IVtimes</code>, the outflow of the first CSTR becomes the inflow of second CSTR  and so on.</p><p>This function reads in the parameter values from a .csv file. The names of the .csv files that contain the parameter values should be &quot;model<em>parameters.csv&quot;, &quot;model</em>parameters2.csv&quot;,  &quot;model_parameters3.csv&quot;, ... and so on.</p><p><strong>Arguments</strong></p><ul><li><code>alg = Rodas4P()</code>: the ODE solver algorithm.</li><li><code>tols = 1e-4</code>: the absolute and relative tolerance of the solver method.</li><li><code>tMax = 300.0</code>: the maximum time (in seconds), that the function will run before timing out.</li><li><code>saveAt = []</code>: specific times to save the solution. If given a number <code>n</code>, the solver will save the solution every <code>n</code> timesteps</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl">julia&gt; u0 = initialConditions();
+
+julia&gt; t = [i for i in 0.0:0.1:50.0];
+
+julia&gt; IV_temp = inflowvector_definition();
+
+julia&gt; IV = [IV_temp*(0.5*rand()+1.0) for i in 1:length(t)];
+
+julia&gt; sols = MultiChamberSolution((0.0,50.0),(u0,u0,u0),IV,t,3);
+Finished Chamber 1
+Finished Chamber 2
+Finished Chamber 3
+
+julia&gt; sols[1]
+retcode: Success
+Interpolation: specialized 3rd order &quot;free&quot; stiffness-aware interpolation
+t: 115-element Vector{Float64}:
+[...]
+
+u: 115-element Vector{Vector{Float64}}:
+[...]
+
+julia&gt; sols[2]
+retcode: Success
+Interpolation: specialized 3rd order &quot;free&quot; stiffness-aware interpolation
+t: 115-element Vector{Float64}:
+[...]
+
+u: 115-element Vector{Vector{Float64}}:
+[...]
+
+julia&gt; sols[3]
+retcode: Success
+Interpolation: specialized 3rd order &quot;free&quot; stiffness-aware interpolation
+t: 115-element Vector{Float64}:
+[...]
+
+u: 115-element Vector{Vector{Float64}}:
+[...]</code></pre></div></section></article><h2 id="Other-Functions"><a class="docs-heading-anchor" href="#Other-Functions">Other Functions</a><a id="Other-Functions-1"></a><a class="docs-heading-anchor-permalink" href="#Other-Functions" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="ADM1jl.RHSfun-NTuple{4, Any}" href="#ADM1jl.RHSfun-NTuple{4, Any}"><code>ADM1jl.RHSfun</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia">RHSfun(du,u,p,t)</code></pre><p>Return the right-hand side of the system of ODEs, this is an in-place function.</p><p><strong>Arguments</strong></p><ul><li><code>du::Vector</code>: the rate change of the state vector (required since the function is defined in-place).</li><li><code>u::Vector</code>: the state vector.</li><li><code>p::Vector</code>: all of the model parameters.</li><li><code>t</code>: the timestep, usually a Float64.</li></ul></div></section></article><article class="docstring"><header><a class="docstring-binding" id="ADM1jl.reactionrates-Tuple{Any, Any, Any, Any, Any, Int64}" href="#ADM1jl.reactionrates-Tuple{Any, Any, Any, Any, Any, Int64}"><code>ADM1jl.reactionrates</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia">reactionrates(bp,rp,php,pressures,sx,NREAC::Int)</code></pre><p>Compute and return the vector of reaction rates.</p><p><strong>Arguments</strong></p><ul><li><code>bp::Vector</code>: the biochemical parameters.</li><li><code>rp::Vector</code>: the reactor parameters.</li><li><code>php::Vector</code>: the physiochemical parameters.</li><li><code>pressures::Vector</code>: the gas pressures.</li><li><code>sx::Vector</code>: the state vector.</li><li><code>NREAC::Integer</code>: the number of reaction rates.</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl">julia&gt; u0 = initialConditions();
+
+julia&gt; bp = biochemicalparameter_definition();
+
+julia&gt; rp = reactorParameterDefinition();
+
+julia&gt; php = physiochemicalParameterDefinition(rp);
+
+julia&gt; pressures = pressureOfGasses(u0,php,rp);
 
 julia&gt; NREAC = 29;
 
-julia&gt; ADM1jl.reactionrates(bp,rp,php,pressures,u0,NREAC)
+julia&gt; reactionrates(bp,rp,php,pressures,u0,NREAC)
 29-element Vector{Real}:
  0.155
  0.28
@@ -38,18 +130,18 @@ julia&gt; ADM1jl.reactionrates(bp,rp,php,pressures,u0,NREAC)
  0.0
  7.402547081085608e-6
  1.295220255437568
- 0.052518812965057435</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/CourtA96/ADM1jl/blob/cab24242953246a8ed8666cbae659b1bb0f25c1c/src/ADM1jl.jl#L117-L157">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="ADM1jl.pressureOfGasses-Tuple{Any, Any, Any}" href="#ADM1jl.pressureOfGasses-Tuple{Any, Any, Any}"><code>ADM1jl.pressureOfGasses</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia hljs">pressureOfGasses(sx,php,rp)</code></pre><p>Compute the pressures of the gasses.</p><p><strong>Arguments</strong></p><ul><li><code>sx::Vector</code>: the state vector.</li><li><code>php::Vector</code>: the physicochemical parameters.</li><li><code>rp::Vector</code>: the reactor parameters.</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; u0 = ADM1jl.InitialConditions();
+ 0.052518812965057435</code></pre></div></section></article><article class="docstring"><header><a class="docstring-binding" id="ADM1jl.pressureOfGasses-Tuple{Any, Any, Any}" href="#ADM1jl.pressureOfGasses-Tuple{Any, Any, Any}"><code>ADM1jl.pressureOfGasses</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia">pressureOfGasses(sx,php,rp)</code></pre><p>Compute the pressures of the gasses.</p><p><strong>Arguments</strong></p><ul><li><code>sx::Vector</code>: the state vector.</li><li><code>php::Vector</code>: the physicochemical parameters.</li><li><code>rp::Vector</code>: the reactor parameters.</li></ul><p><strong>Examples</strong></p><pre><code class="language-julia-repl">julia&gt; u0 = initialConditions();
 
-julia&gt; rp = ADM1jl.reactorParameterDefinition();
+julia&gt; rp = reactorParameterDefinition();
 
-julia&gt; php = ADM1jl.physiochemicalParameterDefinition(rp);
+julia&gt; php = physiochemicalParameterDefinition(rp);
 
-julia&gt; ADM1jl.pressureOfGasses(u0,php,rp)
+julia&gt; pressureOfGasses(u0,php,rp)
 5-element Vector{Float64}:
     1.6333471490625e-5
     0.6525381992578124
     0.35869584449999997
     1.0669181223042932
- 2695.9061152146637</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/CourtA96/ADM1jl/blob/cab24242953246a8ed8666cbae659b1bb0f25c1c/src/ADM1jl.jl#L36-L62">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="ADM1jl.monod-Tuple{Any, Any}" href="#ADM1jl.monod-Tuple{Any, Any}"><code>ADM1jl.monod</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia hljs">monod(u, k)</code></pre><p>Compute the monod function <code>u/(u+k)</code> where <code>u</code> is the state varible and <code>k</code> is the half-saturation concentration.</p><p>If <code>u &lt;= 0</code> return <code>0</code>.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; ADM1jl.monod(3.0,2.0) # when u is non-zero positive
-0.6</code></pre><pre><code class="language-julia-repl hljs">julia&gt; ADM1jl.monod(-3.0,2.0) # when u is negative
-0</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/CourtA96/ADM1jl/blob/cab24242953246a8ed8666cbae659b1bb0f25c1c/src/ADM1jl.jl#L89-L106">source</a></section></article></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../page2/">« Getting started</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.25 on <span class="colophon-date" title="Friday 14 July 2023 16:13">Friday 14 July 2023</span>. Using Julia version 1.7.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+    2695.9061152146637</code></pre></div></section></article><article class="docstring"><header><a class="docstring-binding" id="ADM1jl.monod-Tuple{Any, Any}" href="#ADM1jl.monod-Tuple{Any, Any}"><code>ADM1jl.monod</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia">monod(u, k)</code></pre><p>Compute the monod function <code>u/(u+k)</code> where <code>u</code> is the state varible and <code>k</code> is the half-saturation concentration.</p><p>If <code>u &lt;= 0</code> return <code>0</code>.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl">julia&gt; monod(3.0,2.0) # when u is non-zero positive
+0.6</code></pre><pre><code class="language-julia-repl">julia&gt; monod(-3.0,2.0) # when u is negative
+0</code></pre></div></section></article></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../page2/">« Getting started</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Wednesday 9 August 2023 15:20">Wednesday 9 August 2023</span>. Using Julia version 1.7.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
