@@ -24,7 +24,7 @@ julia> IV = inflowvector_definition();
 
 julia> sol, tSol = ADM1sol((0.0,200.0),u0,IV); # compute the solution
 
-julia> plotSols(sol) # display the plots
+julia> plotSols(sol); # display the plots
 ```
 
 ```jldoctest
@@ -36,9 +36,9 @@ julia> sol, tSol = ADM1sol((0.0,200.0),u0,IV); # compute the solution
 
 julia> plt1,plt2 = plotSols(sol,displayPlots=false,returnPlots=true); # return the plots
 
-julia> display(plt1) # display the first plot
+julia> display(plt1); # display the first plot
 
-julia> display(plt2) # display the second plot
+julia> display(plt2); # display the second plot
 ```
 """
 function plotSols(sol;titleText::String="Plots of Solutions",displayPlots=true,savePNG=false,returnPlots=false)

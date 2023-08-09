@@ -46,7 +46,22 @@ sol, tSol = ADM1sol(tspan,u0,IV); # computes the solution  and saves it to sol, 
 sol # the solution has two fields: t contains the timesteps and u contains the solution at each timestep
 
 tSol # this is the time ExampleSol took to solve the system
+```
 
+To save solutions at specific times, use the `saveAt` keyword argument. It takes either a vector of times to stop, or a number `n` that tells the solver to save solution every `n` timesteps. For example:
+
+```@repl
+using ADM1jl
+
+u0 = initialConditions(); # assigns the default initial conditions to u0
+
+IV = inflowvector_definition(); # assigns the default inflow vector to IV
+
+tspan = (0.0,200.0); # the solution will be computed from t=0.0 to t=200.0
+
+sol2, tSol2 = ADM1sol(tspan,u0,IV,saveAt=[10.0,15.0,50.0,100.0,150.0,200.0]); # save the solution at 10 days, 15 days, 50 days and so on.
+
+sol3, tSol3 = ADM1sol(tspan,u0,IV,saveAt=5.0); # save the solution every 5 days
 ```
 
 ### Modifying Parameters
