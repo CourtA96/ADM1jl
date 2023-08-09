@@ -203,7 +203,7 @@ IV = inflowvector_definition();
 
 sol, tSol = ADM1sol((0.0,200.0),u0,IV); # compute the solution
 
-plotSols(sol,titleText="Sample Plots",displayPlot=false,savePNG=true); # title the plots "Sample Plots" and save them to .png files
+plotSols(sol,titleText="Sample Plots",displayPlots=false,savePNG=true); # title the plots "Sample Plots" and save them to .png files
 ```
 
 ## State Variables and their Indices
