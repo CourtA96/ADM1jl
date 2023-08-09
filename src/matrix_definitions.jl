@@ -214,6 +214,8 @@ function reactionrates(bp,rp,php,pressures,sx,NREAC::Int)
    II = I[1]*I_h2 # I_2 in tables 3.1-3.2
    III = I[2]*I_nh3 # I_3 in tables 3.1-3.2
 
+   "Reaction Rates"
+
    rrates=Array{Real}(undef,NREAC)
    rrates[1]= bp[1]*sx[13]
    rrates[2]= bp[2]*sx[14]
