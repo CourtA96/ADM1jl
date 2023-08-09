@@ -177,6 +177,8 @@ plotSols(sol) # displays the plots
 However, there is an error in the Plots package that may cause the plots to overwrite eachother so that only the second plot is displayed. To work around this the following keyword arguments can be used:
 
 ```@repl
+using ADM1jl
+
 u0 = initialConditions();
 
 IV = inflowvector_definition();
@@ -193,6 +195,8 @@ display(plt2) # display the second plot manually
 To change the title of the plots use the `titleText` keyword argument. To save the plots as `.png` files, use the `savePNG` boolean keyword argument. The files will have the same name as the plots titles. For example, the following code titles the plots "Sample Plots" and saves them as `Sample Plots (1 of 2).png` and `Sample Plots (2 of 2).png`.
 
 ```@repl
+using ADM1jl
+
 u0 = initialConditions();
 
 IV = inflowvector_definition();
