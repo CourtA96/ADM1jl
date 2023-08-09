@@ -1,11 +1,20 @@
 export plotSols
 """
-    plotSols(sol)
+    plotSols(sol;<keyword arguments>)
 
-Plot the solutions returned by ADM1sol
+Plot the solutions returned by ADM1sol. The plots are split between two figures and are 
+displayed by default. However, due to an error in Julia's Plots package, the plot's windows 
+may overwrite eachother in some circumstances. If this occurs, use the keyword arguments 
+to view both plots manually.
 
 # Arguments
 - `sol::Vector`: `ODESolution` returned by ADM1 sol
+
+# Optional Arguments
+- `titleText = "Plot of Solutions"`: The title of the plots
+- `displayPlots = true`: Boolean to display the plots or not.
+- `savePNG = false`: Boolean to save pngs of the plots to the working directory as titleText(1 of 2).png and titleText(2 of 2).png
+- `returnPlots = false`: Boolean to return the plots as a tuple so they can be displayed manually
 
 # Examples
 ```jldoctest
@@ -15,10 +24,24 @@ julia> IV = inflowvector_definition();
 
 julia> sol, tSol = ADM1sol((0.0,200.0),u0,IV); # compute the solution
 
-julia> plotSols(sol);
+julia> plotSols(sol) # display the plots
+```
+
+```jldoctest
+julia> u0 = initialConditions();
+
+julia> IV = inflowvector_definition();
+
+julia> sol, tSol = ADM1sol((0.0,200.0),u0,IV); # compute the solution
+
+julia> plt1,plt2 = plotSols(sol,displayPlots=false,returnPlots=true); # return the plots
+
+julia> display(plt1) # display the first plot
+
+julia> display(plt2) # display the second plot
 ```
 """
-function plotSols(sol;titleText::String="Plots of Solutions",displayPlots=true,savePNG=false,returnPlots=true)
+function plotSols(sol;titleText::String="Plots of Solutions",displayPlots=true,savePNG=false,returnPlots=false)
    # I got the code to create the title from https://stackoverflow.com/questions/43066957/adding-global-title-to-plots-jl-subplots
     y = (ones(3))
     title1 = scatter(y, marker=0,markeralpha=0, annotations=(2, y[2], text(string(titleText, " (1 of 2)"),20,"Helvetica")),axis=false, grid=false, leg=false,size=(200,100), labels=:none,reuse=false)

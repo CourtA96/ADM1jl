@@ -143,6 +143,8 @@ sols = MultiChamberSolution((0.0,50.0),(u0,u0,u0),IV,t,3);
 
 ## Plotting
 
+ADM1jl has a built-in plotting function, plotSols, that uses Julia's Plots package to plot the solutions. The following code demonstrates how it functions: 
+
 ```@repl
 using ADM1jl
 
@@ -154,9 +156,36 @@ tspan = (0.0,200.0); # the solution will be computed from t=0.0 to t=200.0
 
 sol, tSol = ADM1sol(tspan,u0,IV); # compute the solution
 
-plotSols(sol)
+plotSols(sol) # displays the plots
 ```
 
+However, there is an error in the Plots package that may cause the plots to overwrite eachother so that only the second plot is displayed. To work around this the following keyword arguments can be used:
+
+```@repl
+u0 = initialConditions();
+
+IV = inflowvector_definition();
+
+sol, tSol = ADM1sol((0.0,200.0),u0,IV); # compute the solution
+
+plt1,plt2 = plotSols(sol,displayPlots=false,returnPlots=true); # stop the plots from displaying automatically and return the plots objects instead
+
+display(plt1) # display the first plot manually
+
+display(plt2) # display the second plot manually
+```
+
+To change the title of the plots use the `titleText` keyword argument. To save the plots as `.png` files, use the `savePNG` boolean keyword argument. The files will have the same name as the plots titles. For example, the following code titles the plots "Sample Plots" and saves them as `Sample Plots (1 of 2).png` and `Sample Plots (2 of 2).png`.
+
+```@repl
+u0 = initialConditions();
+
+IV = inflowvector_definition();
+
+sol, tSol = ADM1sol((0.0,200.0),u0,IV); # compute the solution
+
+plotSols(sol,titleText="Sample Plots",displayPlot=false,savePNG=true); # title the plots "Sample Plots" and save them to .png files
+```
 
 ## State Variables and their Indices
 
