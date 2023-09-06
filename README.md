@@ -7,7 +7,7 @@
 
 # Documentation
 
-The following outline the basic installation and usage of the code. The complete documentation can be found at [https://courta96.github.io/ADM1jl/](https://courta96.github.io/ADM1jl/)
+The following outlines the basic installation and usage of the code. The complete documentation can be found at [https://courta96.github.io/ADM1jl/](https://courta96.github.io/ADM1jl/)
 
 ## Getting started
 
