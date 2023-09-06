@@ -54,7 +54,7 @@ tspan = (0.0,200.0); # the solution will be computed from t=0.0 to t=200.0
 
 sol, tSol = ADM1sol(tspan,u0,IV); # computes the solution  and saves it to sol, the time to solve is saved to tSol
 
-sol # the solution has two fields: t contains the timesteps and u contains the solution at each timestep
+sol # the solution has two fields: sol.t contains the timesteps and sol.u contains the solution at each timestep
 
 tSol # this is the time ExampleSol took to solve the system
 
