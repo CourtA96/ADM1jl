@@ -17,7 +17,7 @@ to view both plots manually.
 - `returnPlots = false`: Boolean to return the plots as a tuple so they can be displayed manually
 
 # Examples
-```jldoctest
+```juia-repl
 julia> u0 = initialConditions();
 
 julia> IV = inflowvector_definition();
@@ -27,7 +27,7 @@ julia> sol, tSol = ADM1sol((0.0,200.0),u0,IV); # compute the solution
 julia> plotSols(sol); # display the plots
 ```
 
-```jldoctest
+```juia-repl
 julia> u0 = initialConditions();
 
 julia> IV = inflowvector_definition();
@@ -89,7 +89,7 @@ will plot the ith solution vs time.
 - `sol::Vector`: `ODESolution` returned by ADM1 sol
 
 # Examples
-```jldoctest
+```juia-repl
 julia> u0 = initialConditions();
 
 julia> IV = inflowvector_definition();
