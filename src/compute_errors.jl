@@ -16,7 +16,7 @@ Compute the percent difference between each element in two vector of type `Vecto
 - `trueSol::Vector`: the true solution at that time.
 
 # Examples
-```jldoctest
+```juia-repl
 julia> u0 = initialConditions();
 
 julia> IV = inflowvector_definition();

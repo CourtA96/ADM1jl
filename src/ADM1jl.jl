@@ -71,7 +71,7 @@ Compute the pressures of the gasses.
 - `rp::Vector`: the reactor parameters.
 
 # Examples
-```jldoctest
+```juia-repl
 julia> u0 = initialConditions();
 
 julia> rp = reactorParameterDefinition();
@@ -121,11 +121,11 @@ Compute the monod function `u/(u+k)` where `u` is the state varible and `k` is t
 If `u <= 0` return `0`.
 
 # Examples
-```jldoctest
+```juia-repl
 julia> monod(3.0,2.0) # when u is non-zero positive
 0.6
 ```
-```jldoctest
+```juia-repl
 julia> monod(-3.0,2.0) # when u is negative
 0
 ```
