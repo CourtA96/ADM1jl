@@ -86,7 +86,7 @@ Compute and return the vector of reaction rates.
 - `NREAC::Integer`: the number of reaction rates.
 
 # Examples
-```jldoctest
+```juia-repl
 julia> u0 = initialConditions();
 
 julia> bp = biochemicalparameter_definition();
