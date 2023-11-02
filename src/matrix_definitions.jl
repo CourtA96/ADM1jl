@@ -298,7 +298,6 @@ export petersenmatrixtranspose_definition
 
 Transpose of the Petersen matrix
 
-```
 """
 @memoize function petersenmatrixtranspose_definition(rp,bp,sp,cc)
    """
