@@ -18,7 +18,7 @@ export initialConditions
 Returns the default initial conditions as a Vector{Float64} of length 35.
 
 # Examples
-```juia-repl
+```julia-repl
 julia> initialConditions()
 35-element Vector{Float64}:
  0.012
@@ -59,7 +59,7 @@ export inflowvector_definition
 Returns the default inflow vector as a Vector{Float64} of length 35.
 
 # Examples
-```juia-repl
+```julia-repl
 julia> inflowvector_definition()
 35-element Vector{Float64}:
  0.01
