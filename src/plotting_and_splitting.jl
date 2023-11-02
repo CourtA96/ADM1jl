@@ -89,7 +89,7 @@ will plot the ith solution vs time.
 - `sol::Vector`: `ODESolution` returned by ADM1 sol
 
 # Examples
-```juia-repl
+```julia-repl
 julia> u0 = initialConditions();
 
 julia> IV = inflowvector_definition();
