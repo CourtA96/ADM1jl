@@ -1,7 +1,8 @@
 name = "ADM1jl"
 uuid = "fcba7d9c-eb10-42d4-b263-36979bb5b0d2"
 authors = ["Courtney Allen <callen15@uoguelph.ca>", "Alexandra Mazanko <amazanko@uoguelph.ca>"]
-version = "1.0.6"
+version = "1.1.0"
+
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"

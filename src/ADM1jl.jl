@@ -46,6 +46,12 @@ export initialConditions
 export plotSols
 export individualSolutions
 
+export petersenmatrixtranspose_biofilmAdditions
+export biofilmRates
+export biofilmRHSfun
+export ExampleBiofilm
+export Biofilm
+
 # dependent files:
 
 include("matrix_definitions.jl")
@@ -55,6 +61,7 @@ include("compute_errors.jl")
 include("reorder_solutions.jl")
 include("compute_steady_state_and_pH.jl")
 include("multichamber.jl")
+include("biofilm0D.jl")
 
 #####################################################
 # Functions:

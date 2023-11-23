@@ -68,7 +68,7 @@ sol3, tSol3 = ADM1sol(tspan,u0,IV,saveAt=5.0); # save the solution every 5 days
 
 To change the system parameters, such as `T_base` or `P_atm`, just open the file `model_parameters.csv` in your working directory (`model_parameters.csv` can be found [here](https://github.com/CourtA96/ADM1jl/blob/main/model_parameters.csv)). Edit whichever entries are necessary, save, and exit. Running `ADM1sol` again will solve the system with the updated parameters.
 
-### Specifying Alorithms
+### Specifying Algorithms
 
 By default, `ADM1sol` solves the system using the `Rodas4P` algorithm given in the `DifferentialEquations` package (documentation for `DifferentialEquations` available [here](https://docs.sciml.ai/DiffEqDocs/stable/)). To use a different algorithm, install the `DifferentialEquations` package and follow the example below:
 
