@@ -60,7 +60,7 @@ include("compute_errors.jl")
 include("reorder_solutions.jl")
 include("compute_steady_state_and_pH.jl")
 include("multichamber.jl")
-include("biofilm0d.jl")
+include("biofilm0D.jl")
 
 #####################################################
 # Functions:
