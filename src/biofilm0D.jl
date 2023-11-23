@@ -333,7 +333,7 @@ function Biofilm(tspan::Tuple,u0::Vector,IV::Vector; tols=1e-4,tMax = 300.0)
 
    AD = [
       p.ka, p.kd
-   ]
+      ]
 
    RP = [i[1] for i in RP]
    BP = [i[1] for i in BP]
@@ -342,7 +342,7 @@ function Biofilm(tspan::Tuple,u0::Vector,IV::Vector; tols=1e-4,tMax = 300.0)
    PhP = [i[1] for i in PhP]
    AD = [i[1] for i in AD]
 
-   parm = zeros(144)
+   parm = zeros(146)
    parm[1:6] = RP
    parm[7:51] = BP
    parm[52:69] = SP
@@ -351,7 +351,7 @@ function Biofilm(tspan::Tuple,u0::Vector,IV::Vector; tols=1e-4,tMax = 300.0)
    parm[108:142] = IV
    parm[143] = time() # start time
    parm[144] = tMax # maximum time
-   parm[146] = AD
+   parm[145:146] = AD
 
    prob=ODEProblem(biofilmRHSfun,u0,tspan,parm)
 
