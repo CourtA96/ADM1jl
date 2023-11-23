@@ -1,4 +1,5 @@
 # List of Functions
+
 ```@meta
 CurrentModule = ADM1jl
 ```
@@ -14,20 +15,57 @@ ADM1sol
 ```@docs
 MultiChamberSolution
 ```
+
+## Parameter Definitions
+
+```@docs
+initialConditions
+```
+
+```@docs
+inflowvector_definition
+```
+
+## Plotting
+
+```@docs
+plotSols
+```
+
+## Functions used by solvers
+
+```@docs
+pressureOfGasses
+```
+
+```@docs
+monod
+```
+
+```@docs
+RHSfun
+```
+
+```@docs
+RHSfunInflowVaried
+```
+
+## Matrix Definition
+
+```@docs
+transportmatrix_definition
+```
+
+```@docs
+reactionrates
+```
+
+```@docs
+petersenmatrixtranspose_definition
+```
+
 ## Other Functions
 
 ```@docs
-RHSfun(du,u,p,t)
-```
-
-```@docs
-reactionrates(bp,rp,php,pressures,sx,NREAC::Int)
-```
-
-```@docs
-pressureOfGasses(sx,php,rp)
-```
-
-```@docs
-monod(u, k)
+individualSolutions
 ```
