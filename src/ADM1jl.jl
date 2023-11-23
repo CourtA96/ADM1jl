@@ -46,11 +46,16 @@ export initialConditions
 export plotSols
 export individualSolutions
 
+export initialConditions_biofilm
+export transportmatrix_definition_biofilm
+export petersenmatrixtranspose_definition_biofilm
 export petersenmatrixtranspose_biofilmAdditions
 export biofilmRates
+export reactionrates_biofilm
 export biofilmRHSfun
 export ExampleBiofilm
 export Biofilm
+export plotSolsBiofilm
 
 # dependent files:
 
