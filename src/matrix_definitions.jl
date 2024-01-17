@@ -11,7 +11,11 @@ export transportmatrix_definition
 """
     transportmatrix_definition(rp,pressures)
 
-Transport matrix
+The transport matrix describes the flow of material out of the system.
+
+# Arguments
+- `rp::Vector`: reactor parameters
+- `pressures::Vector`: pressures computed by pressureOfGasses()
 
 ```
 """
@@ -25,8 +29,8 @@ Transport matrix
    #####################################################
    """
 
-   liquidFlow = rp[6]/rp[4]
-   gasFlow = pressures[5]/rp[5]
+   liquidFlow = rp[6]/rp[4] # liquid flow rate
+   gasFlow = pressures[5]/rp[5] # gas flow rate
 
    TMtemp = [
    liquidFlow,
@@ -115,6 +119,9 @@ julia> reactionrates(bp,rp,php,pressures,u0,NREAC)
 """
 function reactionrates(bp,rp,php,pressures,sx,NREAC::Int)
 
+   # If the number of reaction rates is changed, the number of 
+   # rows in the Petersen matrix transpose must be changed accordingly
+
    "Compute concentration of CO2 and NH4+"
 
    # S_co2 = S_IC - S_hco3m from eqn (4.3) (ie. S = S_acid+S_base)
@@ -175,10 +182,11 @@ function reactionrates(bp,rp,php,pressures,sx,NREAC::Int)
 
    I_pH = [IpH_aa, IpH_ac, IpH_h2]
 
-   "pH inhibition from Table 3.5 c) Empirical upper and lower inhibition"
+   "pH inhibition factors from ADM1:" # replaced with BSM2 inhibition factors
+   #"pH inhibition from Table 3.5 c) Empirical upper and lower inhibition"
    #I_pH =(ones(3) + (2 * (10 .^ (0.5*(pHvals[:,2]-pHvals[:,1]))))) ./ (ones(3) + (10 .^ (pH .- pHvals[:,1])) + (10 .^ (pHvals[:,2] .- pH)))
 
-   "pH inhibition from Table 3.5 c) Empirical lower inhibition only"
+   #"pH inhibition from Table 3.5 c) Empirical lower inhibition only"
    #IpH = zeros(3)
    #for i = 1:3
    #  if pH < pHvals[i,1]
@@ -188,7 +196,7 @@ function reactionrates(bp,rp,php,pressures,sx,NREAC::Int)
    #end
 
    "Non-Competitive Inhibition:"
-   # table 3.5 a)
+   # table 3.5 a) of ADM1
    #KI =  [bp[19], bp[23], bp[27]] # KI = [K_I_h2_fa, K_I_h2_c4, K_I_h2_pro]
 
    I_h2fa =  (1 / (1 + (sx[8]/ bp[19])))
@@ -210,9 +218,9 @@ function reactionrates(bp,rp,php,pressures,sx,NREAC::Int)
 
    "Final inhibition factors:"
 
-   I = I_pH*I_IN # I_1 in tables 3.1-3.2
-   II = I[1]*I_h2 # I_2 in tables 3.1-3.2
-   III = I[2]*I_nh3 # I_3 in tables 3.1-3.2
+   I = I_pH*I_IN # I_1 in tables 3.1-3.2 of ADM1
+   II = I[1]*I_h2 # I_2 in tables 3.1-3.2 of ADM1
+   III = I[2]*I_nh3 # I_3 in tables 3.1-3.2 of ADM1
 
    "Reaction Rates"
 
@@ -259,7 +267,7 @@ function reactionrates(bp,rp,php,pressures,sx,NREAC::Int)
    K_aco2 = php[13]
    K_aIN = php[14]
 
-   # The rates are given by Equation (5.16)
+   # The rates are given by Equation (5.16) in ADM1
    # substituting S_base = S-S_acid in rates 20-23
    rrates[20] = k_AB_va*(sx[25]*(S_H_pos+K_ava)-K_ava*sx[4])
    rrates[21] = k_AB_bu*(sx[26]*(S_H_pos+K_abu)-K_abu*sx[5])
@@ -297,6 +305,12 @@ export petersenmatrixtranspose_definition
     petersenmatrixtranspose_definition(rp,bp,sp,cc)
 
 Transpose of the Petersen matrix
+
+# Arguments
+- `rp::Vector`: reactor parameters
+- `bp::Vector`: biochemical parameters
+- `sp::Vector`: stoichiometric parameters
+- `cc::Vector`: carbon content
 
 """
 @memoize function petersenmatrixtranspose_definition(rp,bp,sp,cc)
@@ -338,7 +352,7 @@ Transpose of the Petersen matrix
    Nbac = 0.08/14
 
    """Constructing Petersen matrix"""
-   # P2 contains the column of the Petersen Matrix
+   # P2 contains the columns of the Petersen Matrix
    P2 = [
    1, 1, 1,
    2, 2,
@@ -377,7 +391,7 @@ Transpose of the Petersen matrix
    35
    ]
 
-   # P1 contains the row of the Petersen Matrix
+   # P1 contains the rows of the Petersen Matrix (corresponding column in commented on right)
    P1 = [
    2, 4, 5, #1
    3, 6, #2
@@ -416,7 +430,7 @@ Transpose of the Petersen matrix
    29 #35
    ]
 
-   # Q contains the entries in the Petersen Matrix
+   # Q contains the entries of the Petersen Matrix
    Q = [
    1.0, 1.0-f_fali, -1.0, #1
    1.0, -1.0, #2
@@ -456,14 +470,11 @@ Transpose of the Petersen matrix
    V_liq/V_gas #35
    ]
 
-   # Q = convert(Array{Real},Q)
-
    PM = sparse(P2,P1,Q)
 
    """Carbon balances"""
    C = zeros(P2[end])
-   # Ctemp = zeros(P2[end])
-   # C = convert(Array{Real},Ctemp)
+
    C[1] =  cc[1] #SU kmole C.kg^-1COD
    C[2] =  cc[2] #aa kmole C.kg^-1COD
    C[3] =  cc[3] #fa kmole C.kg^-1COD

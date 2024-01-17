@@ -2,11 +2,14 @@ module ADM1jl
 
 #####################################################
 # A Julia code to solve the Anaerobic Digestion Model No. 1
-# presented by Batstone et al.
+# presented by Batstone et al. With the minor modifications 
+# given in the Benchmark Simulation Model no. 2 (BSM2) presented
+# by Alex et. al.
 #
 # Authors:
 #  - Alexandra Mazanko (University of Guelph)
 #  - Courtney Allen (University of Guelph)
+#
 #####################################################
 
 using LinearAlgebra
@@ -69,6 +72,25 @@ include("multichamber.jl")
 include("biofilm0D.jl")
 
 #####################################################
+#
+# Where to find things to modify the system:
+#
+#  - this file:
+#       - gas pressure function
+#       - RHSfun (builds the right hand side of the system)
+#
+#  - matrix_definitions.jl
+#       - transport matrix ()
+#       - reaction rates vector
+#       - Petersen matrix 
+#
+# Tip for modifications:
+#  - If the length of the state vector is N and the length
+#   of the reaction rate vector is M then:
+#       - Petersen matrix transpose is MxN
+#       - Transport matrix is NxN
+#
+#####################################################
 # Functions:
 
 export pressureOfGasses
@@ -103,12 +125,12 @@ function pressureOfGasses(sx,php,rp)
 
    # PV = nRT or P = SRT where S=n/V := concentration
 
-   p_gas_h2 =  (sx[33] * php[1] * rp[1] / 16)   # S_gas_h2 = sx[33]
-   p_gas_ch4 =  (sx[34] * php[1] * rp[1] / 64)  # S_gas_ch4 = sx[34]
-   p_gas_co2 =  (sx[35] * php[1] * rp[1])       # S_gas_co2 = sx[35]
+   p_gas_h2 =  (sx[33] * php[1] * rp[1] / 16)   # pressure of hydrogen gas S_gas_h2 = sx[33] 
+   p_gas_ch4 =  (sx[34] * php[1] * rp[1] / 64)  # pressure of methane gas S_gas_ch4 = sx[34]
+   p_gas_co2 =  (sx[35] * php[1] * rp[1])       # pressure of carbon dioxide gas S_gas_co2 = sx[35]
 
-   P_gas =  (p_gas_h2 + p_gas_ch4 + p_gas_co2 + php[15])
-   q_gas =  (php[16] * (P_gas - rp[3])) # gas flow through pipe eqn (5.10)
+   P_gas =  (p_gas_h2 + p_gas_ch4 + p_gas_co2 + php[15]) # total pressure of all gasses
+   q_gas =  (php[16] * (P_gas - rp[3])) # gas flow through pipe eqn (5.10) of ADM1
    if q_gas < 0
       q_gas = 0
    end
@@ -202,6 +224,7 @@ function RHSfun(du,u,p,t)
       error(errStr)
    end
 
+   # compute the rates of change
    du .= TM*u + PM*rr + IV*liquidFlow
 
 end
@@ -331,13 +354,16 @@ function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Float64}; alg = Rodas4P(), t
 
    p = CSV.File("model_parameters.csv")
    # values indexed by column header, ie: params_temp.R  returns 0.083145
+   
+   # Reactor parameters
    RP = [
    p.T_ad, p.T_base,
    p.P_atm,
    p.V_liq, p.V_gas,
    p.Q_ad
    ]
-
+   
+   # Biochemical parameters
    BP = [p.k_dis, p.k_hyd_ch, p.k_hyd_pr, p.k_hyd_li, p.tresX,
          p.k_dec_all, p.K_S_IN,
          p.pH_UL_aa, p.pH_LL_aa,
@@ -352,6 +378,7 @@ function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Float64}; alg = Rodas4P(), t
          p.k_dec_X_su, p.k_dec_X_aa, p.k_dec_X_fa, p.k_dec_X_c4, p.k_dec_X_pro, p.k_dec_X_ac, p.k_dec_X_h2
          ]
 
+   # Stoichiometric parameters
    SP =  [
          p.f_sI_xc, p.f_xI_xc, p.f_ch_xc, p.f_pr_xc, p.f_li_xc,
          p.N_xc, p.N_I, p.f_fa_li,
@@ -359,15 +386,16 @@ function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Float64}; alg = Rodas4P(), t
          p.N_aa, p.f_va_aa, p.f_bu_aa, p.f_pro_aa, p.f_ac_aa
          ] # Note that N_xs and N_I values differ between python and julia
 
-
-   C_IC = 1.0
-   C_IN = 0.0
-   C_h2 = 0.0
+   # Carbon content
+   C_IC = 1.0 # Inorganic carbon is 100% carbon
+   C_IN = 0.0 # Inorganic nitrogen is 0% carbon
+   C_h2 = 0.0 # hydrogen is 0% carbon
    CC = [
          p.C_su, p.C_aa, p.C_fa, p.C_va, p.C_bu, p.C_pro, p.C_ac, C_h2, p.C_ch4, C_IC, C_IN, p.C_sI,
          p.C_xc, p.C_ch, p.C_pr, p.C_li, p.C_bac, p.C_xI
          ]
 
+   # Physiochemical parameters
    PhP = [
          p.R,
          p.K_h2o, p.k_AB_va, p.k_AB_bu, p.k_AB_pro, p.k_AB_ac, p.k_AB_co2, p.k_AB_IN,
