@@ -845,7 +845,8 @@ export Biofilm
 """
     function Biofilm(tspan::Tuple,u0::Vector,IV::Vector; <keyword arguments>)
 
-Compute the solution for the given timespan, `tspan`; initial condition, `u0`; and inflow vector `IV`.
+Compute the biofilm solution for the given timespan, `tspan`; initial condition, `u0`; and inflow vector `IV`.
+The last 12 elements of the statevector are 
 
 Also return the time (in seconds) the solution took to compute.
 
@@ -856,23 +857,23 @@ Also return the time (in seconds) the solution took to compute.
 
 # Examples
 ```julia-repl
-julia> u0 = ADM1code.InitialConditions();
+julia> u0 = initialConditions_biofilm(); # 47 elements
 
-julia> IV = ADM1code.inflowvector_definition();
+julia> IV = inflowvector_definition();
 
-julia> sol, tSol = ADM1code.ExampleSol((0.0,200.0),u0,IV);
+julia> sol, tSol = Biofilm((0.0,200.0),u0,IV);
 
 julia> sol
 retcode: Success
-Interpolation: specialized 3rd order "free" stiffness-aware interpolation
-t: 146-element Vector{Float64}:
+Interpolation: specialized 2nd order "free" stiffness-aware interpolation
+t: 778-element Vector{Float64}:
 [...]
 
-u: 146-element Vector{Vector{Float64}}:
+u: 778-element Vector{Vector{Float64}}:
 [...]
 
 julia> tSol
-0.3854937
+11.4968794
 ```
 """
 function Biofilm(tspan::Tuple,u0::Vector,IV::Vector; tols=1e-4,tMax = 300.0)

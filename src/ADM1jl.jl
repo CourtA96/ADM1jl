@@ -17,7 +17,7 @@ using DifferentialEquations
 using Plots
 default(fontfamily="Helvetica")
 using SparseArrays
-using Memoize
+using Memoization
 using CSV
 using DataFrames
 using Interpolations
