@@ -1175,7 +1175,7 @@ end
 
 export ADM1toBiofilmSolution
 """
-    function ADM1toBiofilmSolution(tspan::Tuple,u0::Tuple,IV::Vector,nChambers::Int64; <keyword arguments>)
+    function ADM1toBiofilmSolution(tspan::Tuple,u0::Tuple,IV::Vector; <keyword arguments>)
 
 Compute the solution for a system of `nChambers` connected CSTRs with `u0` initial conditions. The 
 inflow of the first CSTR is given by `IV`, the outflow of the first CSTR becomes the inflow of second CSTR 
