@@ -955,22 +955,22 @@ function Biofilm(tspan::Tuple,u0::Vector,IV::Vector; tols=1e-4,tMax = 300.0)
 
    global sol = "not defined"
 
-   # try
+   try
       global t = @timed sol = solve(prob,alg=Rosenbrock23())
-   # catch e
-   #    printstyled(stderr,"\nERROR: ", bold=true, color=:red)
-   #    printstyled(stderr,sprint(showerror,e), color=:light_red)
-   #    println(stderr)
-   # end
+   catch e
+      printstyled(stderr,"\nERROR: ", bold=true, color=:red)
+      printstyled(stderr,sprint(showerror,e), color=:light_red)
+      println(stderr)
+   end
 
-   # isSolved = (sol != "not defined")
+   isSolved = (sol != "not defined")
 
-   # if isSolved == true
+   if isSolved == true
       return sol,t[2]
-   # else
-   #    # return nothing # normally the method should return nothing since the problem was not solved
-   #    return ["tMax reached" for i in 1:47],"tMax reached" # only use this for testing
-   # end
+   else
+      # return nothing # normally the method should return nothing since the problem was not solved
+      return ["tMax reached" for i in 1:47],"tMax reached" # only use this for testing
+   end
 
 end
 
