@@ -35,9 +35,6 @@ function RHSfunInflowVaried(du::Vector,u::Vector,p::Vector,t)
    # compute reaction rates
    rr = reactionrates(BP,RP,PhP,pressures,u,size(PM)[2])
 
-   # compute inflow/outflow rate
-   liquidFlow = RP[6]/RP[4]
-
    t2 = time()
 
    if t2-t1 > tMax
@@ -45,7 +42,7 @@ function RHSfunInflowVaried(du::Vector,u::Vector,p::Vector,t)
       error(errStr)
    end
 
-   du .= TM*u + PM*rr + IV*liquidFlow
+   du .= TM*u + PM*rr - TM*IV
 
 end
 
