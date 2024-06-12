@@ -1318,9 +1318,14 @@ function MultiBiofilmSolution(tspan::Tuple,u0::Tuple,IV::Vector,nChambers::Int64
     println("Finished Chamber 1")
 
     for i in 2:nChambers
+      if typeof(sols[i-1]) != Vector{String}
         filename = string("model_parameters",i,".csv")
         sols[i] = BiofilmMultiChamberSol(tspan,u0[i],sols[i-1],paramFilename = filename,tols=tols,tMax=tMax,saveAt=saveAt)[1]
         println("Finished Chamber ",i)
+      else
+        print("Could not complete chamber because previous chamber errored out.")
+        sols[i] = ["tMax Reached","tMax Reached","tMax Reached","tMax Reached","tMax Reached","tMax Reached","tMax Reached","tMax Reached","tMax Reached","tMax Reached","tMax Reached","tMax Reached","tMax Reached","tMax Reached","tMax Reached","tMax Reached"]
+      end
     end
 
     return sols
