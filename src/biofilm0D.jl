@@ -822,22 +822,22 @@ function ExampleBiofilm(tspan::Tuple,u0::Vector,IV::Vector; tols=1e-4,tMax = 300
 
    global sol = "not defined"
 
-   # try
+   try
       global t = @timed sol = solve(prob,alg=Rosenbrock23())
-   # catch e
-   #    printstyled(stderr,"\nERROR: ", bold=true, color=:red)
-   #    printstyled(stderr,sprint(showerror,e), color=:light_red)
-   #    println(stderr)
-   # end
+   catch e
+      printstyled(stderr,"\nERROR: ", bold=true, color=:red)
+      printstyled(stderr,sprint(showerror,e), color=:light_red)
+      println(stderr)
+   end
 
-   # isSolved = (sol != "not defined")
+   isSolved = (sol != "not defined")
 
-   # if isSolved == true
+   if isSolved == true
       return sol,t[2]
-   # else
-   #    # return nothing # normally the method should return nothing since the problem was not solved
-   #    return ["tMax reached" for i in 1:47],"tMax reached" # only use this for testing
-   # end
+   else
+      # return nothing # normally the method should return nothing since the problem was not solved
+      return ["tMax reached" for i in 1:47],"tMax reached" # only use this for testing
+   end
 
 end
 
@@ -1238,9 +1238,15 @@ function ADM1toBiofilmSolution(tspan::Tuple,u0::Tuple,IV::Vector;alg = Rodas4P()
 
     println("Finished Chamber 1")
 
-    filename = string("model_parameters2.csv")
-    sols[2] = BiofilmMultiChamberSol(tspan,u0[2],sols[1],paramFilename = filename,tols=tols,tMax=tMax,saveAt=saveAt)[1]
-    println("Finished Chamber 2")
+    if typeof(sols[1]) != Vector{String}
+
+      filename = string("model_parameters2.csv")
+      sols[2] = BiofilmMultiChamberSol(tspan,u0[2],sols[1],paramFilename = filename,tols=tols,tMax=tMax,saveAt=saveAt)[1]
+      println("Finished Chamber 2")
+    else
+      print("Could not complete chamber 2 because chamber 1 errored out.")
+
+    end
 
     return sols
 

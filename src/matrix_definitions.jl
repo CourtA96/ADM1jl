@@ -29,8 +29,8 @@ The transport matrix describes the flow of material out of the system.
    #####################################################
    """
 
-   liquidFlow = rp[6]/rp[4] # liquid flow rate
-   gasFlow = pressures[5]/rp[5] # gas flow rate
+   liquidFlow = rp[6]/rp[4] # liquid flow rate (Q_ad/V_liq)
+   gasFlow = pressures[5]/rp[5] # gas flow rate (q_gas/V_gas) (q_gas depends on k_p the pipe resistence coefficient)
 
    TMtemp = [
    liquidFlow,
