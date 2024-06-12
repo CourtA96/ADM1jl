@@ -295,7 +295,7 @@ function ExampleSol(tspan::Tuple,u0::Vector,IV::Vector;alg = Rodas4P(), tols=1e-
    global sol = "not defined"
 
    try
-      global t = @timed sol = solve(prob,alg, abstol=tols,reltol=tols)
+      global t = @timed sol = solve(prob,alg, abstol=tols,reltol=tols,isoutofdomain = (u,p,t) -> any(x->x<0,u))
    catch e
       printstyled(stderr,"\nERROR: ", bold=true, color=:red)
       printstyled(stderr,sprint(showerror,e), color=:light_red)
@@ -425,7 +425,7 @@ function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Float64}; alg = Rodas4P(), t
    global sol = "not defined"
 
    try
-      global t = @timed sol = solve(prob,alg, abstol=tols,reltol=tols,saveat=saveAt)
+      global t = @timed sol = solve(prob,alg, abstol=tols,reltol=tols,saveat=saveAt,isoutofdomain = (u,p,t) -> any(x->x<0,u))
    catch e
       printstyled(stderr,"\nERROR: ", bold=true, color=:red)
       printstyled(stderr,sprint(showerror,e), color=:light_red)
@@ -557,7 +557,7 @@ function ADM1sol(tspan::Tuple,u0::Vector,IV::Vector{Vector{Float64}},IVtimes::Ve
    global sol = "not defined"
 
    try
-      global t = @timed sol = solve(prob,alg, abstol=tols,reltol=tols, saveat=saveAt)
+      global t = @timed sol = solve(prob,alg, abstol=tols,reltol=tols, saveat=saveAt,isoutofdomain = (u,p,t) -> any(x->x<0,u))
    catch e
       printstyled(stderr,"\nERROR: ", bold=true, color=:red)
       printstyled(stderr,sprint(showerror,e), color=:light_red)

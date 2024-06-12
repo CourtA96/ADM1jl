@@ -823,7 +823,7 @@ function ExampleBiofilm(tspan::Tuple,u0::Vector,IV::Vector; tols=1e-4,tMax = 300
    global sol = "not defined"
 
    try
-      global t = @timed sol = solve(prob,alg=Rosenbrock23())
+      global t = @timed sol = solve(prob,alg=Rosenbrock23(),isoutofdomain = (u,p,t) -> any(x->x<0,u))
    catch e
       printstyled(stderr,"\nERROR: ", bold=true, color=:red)
       printstyled(stderr,sprint(showerror,e), color=:light_red)
@@ -956,7 +956,7 @@ function Biofilm(tspan::Tuple,u0::Vector,IV::Vector; tols=1e-4,tMax = 300.0)
    global sol = "not defined"
 
    try
-      global t = @timed sol = solve(prob,alg=Rosenbrock23())
+      global t = @timed sol = solve(prob,alg=Rosenbrock23(),isoutofdomain = (u,p,t) -> any(x->x<0,u))
    catch e
       printstyled(stderr,"\nERROR: ", bold=true, color=:red)
       printstyled(stderr,sprint(showerror,e), color=:light_red)
@@ -1093,7 +1093,7 @@ function Biofilm(tspan::Tuple,u0::Vector,IV::Vector{Vector{Float64}},IVtimes::Ve
    global sol = "not defined"
 
    try
-      global t = @timed sol = solve(prob,alg=Rosenbrock23())
+      global t = @timed sol = solve(prob,alg=Rosenbrock23(),isoutofdomain = (u,p,t) -> any(x->x<0,u))
    catch e
       printstyled(stderr,"\nERROR: ", bold=true, color=:red)
       printstyled(stderr,sprint(showerror,e), color=:light_red)
@@ -1451,7 +1451,7 @@ function BiofilmMultiChamberSol(tspan::Tuple,u0::Vector,IV::SciMLBase.ODESolutio
    global sol = "not defined"
 
    try
-      global t = @timed sol = solve(prob,alg=Rosenbrock23())
+      global t = @timed sol = solve(prob,alg=Rosenbrock23(),isoutofdomain = (u,p,t) -> any(x->x<0,u))
    catch e
       printstyled(stderr,"\nERROR: ", bold=true, color=:red)
       printstyled(stderr,sprint(showerror,e), color=:light_red)

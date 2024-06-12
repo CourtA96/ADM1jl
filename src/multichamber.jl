@@ -338,7 +338,7 @@ function ExampleMultiChamberSol(tspan::Tuple,u0::Vector,IV::SciMLBase.ODESolutio
    global sol = "not defined"
 
    try
-      global t = @timed sol = solve(prob,alg, abstol=tols,reltol=tols)
+      global t = @timed sol = solve(prob,alg, abstol=tols,reltol=tols,isoutofdomain = (u,p,t) -> any(x->x<0,u))
    catch e
       printstyled(stderr,"\nERROR: ", bold=true, color=:red)
       printstyled(stderr,sprint(showerror,e), color=:light_red)
@@ -471,7 +471,7 @@ function ADM1MultiChamberSol(tspan::Tuple,u0::Vector,IV::SciMLBase.ODESolution; 
    global sol = "not defined"
 
    try
-      global t = @timed sol = solve(prob,alg, abstol=tols,reltol=tols,saveat=saveAt)
+      global t = @timed sol = solve(prob,alg, abstol=tols,reltol=tols,saveat=saveAt,isoutofdomain = (u,p,t) -> any(x->x<0,u))
    catch e
       printstyled(stderr,"\nERROR: ", bold=true, color=:red)
       printstyled(stderr,sprint(showerror,e), color=:light_red)
