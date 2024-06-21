@@ -876,7 +876,7 @@ julia> tSol
 11.4968794
 ```
 """
-function Biofilm(tspan::Tuple,u0::Vector,IV::Vector; tols=1e-4,tMax = 300.0)
+function Biofilm(tspan::Tuple,u0::Vector,IV::Vector; tols=1e-4,tMax = 300.0,alg=Rodas4P())
 
    # Combine all of the parameter vectors into one vector (parm) for the solver.
 
@@ -956,7 +956,7 @@ function Biofilm(tspan::Tuple,u0::Vector,IV::Vector; tols=1e-4,tMax = 300.0)
    global sol = "not defined"
 
    try
-      global t = @timed sol = solve(prob,alg=Rosenbrock23(),isoutofdomain = (u,p,t) -> any(x->x<0,u))
+      global t = @timed sol = solve(prob,abstol=tols,reltol=tols,alg=alg,isoutofdomain = (u,p,t) -> any(x->x<0,u))
    catch e
       printstyled(stderr,"\nERROR: ", bold=true, color=:red)
       printstyled(stderr,sprint(showerror,e), color=:light_red)
