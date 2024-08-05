@@ -1009,7 +1009,7 @@ julia> tSol
 11.4968794
 ```
 """
-function Biofilm(tspan::Tuple,u0::Vector,IV::Vector{Vector{Float64}},IVtimes::Vector{Float64}; tols=1e-4, tMax = 300.0, saveAt=[])
+function Biofilm(tspan::Tuple,u0::Vector,IV::Vector{Vector{Float64}},IVtimes::Vector{Float64}; tols=1e-4, tMax = 300.0, saveAt=[],alg=Rodas4P())
 
    # Combine all of the parameter vectors into one vector (parm) for the solver.
 
@@ -1093,7 +1093,7 @@ function Biofilm(tspan::Tuple,u0::Vector,IV::Vector{Vector{Float64}},IVtimes::Ve
    global sol = "not defined"
 
    try
-      global t = @timed sol = solve(prob,alg=Rosenbrock23(),isoutofdomain = (u,p,t) -> any(x->x<0,u))
+      global t = @timed sol = solve(prob,abstol=tols,reltol=tols,alg=alg,isoutofdomain = (u,p,t) -> any(x->x<0,u))
    catch e
       printstyled(stderr,"\nERROR: ", bold=true, color=:red)
       printstyled(stderr,sprint(showerror,e), color=:light_red)
@@ -1241,7 +1241,7 @@ function ADM1toBiofilmSolution(tspan::Tuple,u0::Tuple,IV::Vector;alg = Rodas4P()
     if typeof(sols[1]) != Vector{String}
 
       filename = string("model_parameters2.csv")
-      sols[2] = BiofilmMultiChamberSol(tspan,u0[2],sols[1],paramFilename = filename,tols=tols,tMax=tMax,saveAt=saveAt)[1]
+      sols[2] = BiofilmMultiChamberSol(tspan,u0[2],sols[1],paramFilename = filename,alg=alg,tols=tols,tMax=tMax,saveAt=saveAt)[1]
       println("Finished Chamber 2")
     else
       print("Could not complete chamber 2 because chamber 1 errored out.")
@@ -1367,7 +1367,7 @@ julia> tSol
 11.4968794
 ```
 """
-function BiofilmMultiChamberSol(tspan::Tuple,u0::Vector,IV::SciMLBase.ODESolution; paramFilename = "model_parameters.csv", tols=1e-4, tMax = 300.0, saveAt=[])
+function BiofilmMultiChamberSol(tspan::Tuple,u0::Vector,IV::SciMLBase.ODESolution;alg=Rodas4P(), paramFilename = "model_parameters.csv", tols=1e-4, tMax = 300.0, saveAt=[])
 
    # Combine all of the parameter vectors into one vector (parm) for the solver.
 
@@ -1451,7 +1451,7 @@ function BiofilmMultiChamberSol(tspan::Tuple,u0::Vector,IV::SciMLBase.ODESolutio
    global sol = "not defined"
 
    try
-      global t = @timed sol = solve(prob,alg=Rosenbrock23(),isoutofdomain = (u,p,t) -> any(x->x<0,u))
+      global t = @timed sol = solve(prob,abstol=tols,reltol=tols,alg=alg,isoutofdomain = (u,p,t) -> any(x->x<0,u))
    catch e
       printstyled(stderr,"\nERROR: ", bold=true, color=:red)
       printstyled(stderr,sprint(showerror,e), color=:light_red)
